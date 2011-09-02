@@ -1,0 +1,22 @@
+<% content_for :current_page, :blogs %>
+<% content_for :current_action, :new %>
+<%= render :layout => 'layout' do %>
+  <%= render :partial => 'admin/sections/left_tree' %>
+  <div class="right_content">
+         <div id="commentWrapper">
+      <div id="comment">
+      <h4>Edition de la rubrique <strong><i><%= @section.title %></i></strong></h4>
+      <div class="toolbar">
+    <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_section').submit()", :class => "awesome green" %>&nbsp;
+    <%= link_to "Annuler", :back, :class => "awesome grey" %>
+      </div>
+      </div>
+      </div>
+    <%= form_for(@section, :as => :section, :url => admin_section_path(@section),
+      :html => {:multipart => true, :id => "form_section"}) do |f| %>
+      <%= render :partial => "admin/sections/section",
+        :locals => {:f => f, :button_name => "Enregistrer"} %>
+    <% end %>
+  </div>
+<%end%>
+

@@ -1,0 +1,173 @@
+<div class="block_details">
+    <% if f.object.errors.any? %>
+    <div id="errorExplanation">
+      <h3>Ce formulaire contient des erreurs:</h3>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+<div class="required">
+  <label for="post_section_id">Rubrique :</label>
+  <%= f.select :section_id, @section.collect{|s| [ s.title, s.id ] }%>
+
+</div>
+<%= text_field_sthb f, :title, "Titre", "required" %>
+<div class="required">
+  <label for="post_teaser">En-tête :</label>
+  <%= f.text_area :teaser, :rows => 10, :cols => 40 %>
+</div>
+<div class="required">
+  <label for="post_description">Contenu :</label>
+  <%= f.text_area :description, :rows => 25, :cols => 40, :class => "tinymce" %>
+</div>
+<div class="optional">
+  <label>&nbsp;</label>
+</div>
+<div class="optional">
+  <label for="post_media_code">Code Vidéo :</label>
+  <%= f.text_area :media_code, :rows => 10, :cols => 40 %>
+</div>
+<div class="optional">
+<label>Publiée le : </label>
+<%= text_field_tag "post[published_at]",f.object.published_at.blank? ? "" : I18n.l(f.object.published_at, :format => :"dd-mm-yy"), :id => "post_published_at" %>
+</div>
+    <div class="optional">
+      <label>Expirée le : </label>
+      <%=  text_field_tag "post[expired_at]",
+        f.object.expired_at.blank? || (f.object.expired_at.strftime("%d%m%Y")=="31122999") ? "" :
+        I18n.l(f.object.expired_at, :format => :"dd-mm-yy"),
+        :id => "post_expired_at" %>
+      <span class="tiny">si vide, l'actualité n'expire jamais</span>
+    </div>
+    <script type="text/javascript">
+      $(function() {
+        $("#post_published_at").datepicker({
+          showOn: 'button',
+          buttonImage: '/images/admin/calendar.png',
+          buttonImageOnly: true,
+          buttonText: 'Cliquez ici pour afficher le calendrier',
+          dateFormat: 'dd-mm-yy'
+        });
+      });
+      $(function() {
+        $("#post_expired_at").datepicker({
+          showOn: 'button',
+          buttonImage: '/images/admin/calendar.png',
+          buttonImageOnly: true,
+          buttonText: 'Cliquez ici pour afficher le calendrier',
+          dateFormat: 'dd-mm-yy'
+        });
+      });
+    </script>
+
+  <div id="form_area_image">
+    <div class="optional">
+      <label>Document : </label>
+      <%= f.file_field :document %>
+    </div>
+    <div class="optional">
+      <label>Document actuel : </label>
+      <% unless f.object.document.blank? %>
+        <%= link_to f.object.document.asset_file_name, f.object.document.asset.url%>
+        <span class="tiny">
+          <%= check_box_tag 'post[document_marked_for_deletion]', '1', false, :class => "checkbox" %>
+          &nbsp;supprimer le document à la sauvegarde
+        </span>
+      <%else%>
+        Aucun document
+      <% end %>
+
+    </div>
+  </div>
+    <div id="form_area_image">
+    <div class="optional">
+      <label>Image : </label>
+      <%= f.file_field :picture %>
+    </div>
+    <div class="optional">
+      <label>Image actuelle : </label>
+      <% unless f.object.picture.blank? %>
+        <%= image_tag f.object.picture.asset.url(:thumb)%>
+        <span class="tiny">
+          <%= check_box_tag 'post[picture_marked_for_deletion]', '1', false, :class => "checkbox" %>
+          &nbsp;supprimer l'image à la sauvegarde
+        </span>
+      <%  else%>
+        Aucune image
+      <% end %>
+
+    </div>
+  </div>
+
+<div class="optional">
+  <label for="post_tags">Mots Clés (séparés par un espace):</label>
+
+  <%= text_field(:tag_post, :tags, :value => @keywords )  %>
+</div>
+    
+    
+<br /><br />
+        <div class="optional">
+  <label for="post_is_highlighted">Mettre en page d'accueil :</label>
+  <%= f.check_box :is_highlighted  %>
+</div>
+<fieldset>
+  <legend>Référencement</legend>
+  <%= text_field_sthb f, :seo_title, "Titre de la page", "optional" %>
+  <%= text_field_sthb f, :seo_keywords, "Mots clés", "optional" %>
+  <%= text_field_sthb f, :seo_description, "Description", "optional" %>
+</fieldset>
+
+<fieldset>
+    <legend>Diaporama</legend>
+    <table>
+      <tr>
+        <th style="width:100px">Avatar</th>
+        <th style="width:200px">Titre/Alt</th>
+        <th style="width:50px">Position</th>
+        <th style="width:50px">Suppr.</th>
+      </tr>
+      <% f.object.slideshows.each do |slideshow| %>
+        <tr>
+          <td style="width:100px"><%= image_tag slideshow.picture.asset.url(:small) %></td>
+          <td style="width:200px"><%= text_field_tag "slideshow[update][#{slideshow.id}][title]",slideshow.title  %></td>
+          <td style="width:50px"><%= select_tag "slideshow[update][#{slideshow.id}][position]",
+              options_for_select(f.object.slideshows.count.times.collect { |idx|
+                [ (idx +1).to_s, (idx +1).to_s ]
+              }, :selected => slideshow.position.to_s)
+          %>
+          </td>
+          <td style="width:50px"><%= check_box_tag "slideshow[delete][#{slideshow.id}]", true, false, :class => "checkbox" %>
+          <%=
+          
+        
+          hidden_field_tag "slideshow[fields][#{slideshow.id}][picture][id]", (slideshow.picture_id rescue 0)
+        
+        %>
+          </td>
+        </tr>
+
+        
+        
+      <% end %>
+    </table>
+    <div id="content_list_new" style="clear: both">
+
+    </div>
+
+    <script type="text/javascript">
+      dynamic_list_file_for_slideshow('image','content_list_new','slideshow[add]', 'new')
+    </script>
+  </fieldset>
+
+  <div class="required" style="clear: both">
+  <label>&nbsp;</label>
+  <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_post').submit()", :class => "awesome green" %>&nbsp;
+  <%= link_to "Annuler", :back, :class => "awesome grey" %>
+</div>
+  </fieldset>
+</div>

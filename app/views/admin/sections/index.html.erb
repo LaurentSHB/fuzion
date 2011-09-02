@@ -1,0 +1,55 @@
+<% content_for :current_page, :blogs %>
+<% content_for :current_action, :index %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/sections/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+    
+          <th style="text-align: left; white-space:nowrap">Nom de la rubrique</th>
+
+          <th>Position</th>
+          <th align="center">Actions</th>
+        </tr>
+        <%
+        positions_for_section = [];
+        @sections.count.times.each{|i|positions_for_section<<i+1}
+        @sections.each do |section| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%section.id%>">
+           
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to section.title.blank? ? "" : section.title,
+                edit_admin_section_path(section.id) %>
+            </td>
+
+            <td>
+            
+            <%= form_tag( update_position_admin_section_path(section),
+          :method => :put, :id => "form_position_section_#{section.id}") {
+          select_tag('position', options_for_select(positions_for_section, section.position.to_s),
+            :id => nil, :onchange => "$('#form_position_section_#{section.id}').submit();")}%>
+            </td>
+            
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_section_path(section), :method => :get %>
+              <%= button_to "Supprimer", admin_section_path(section), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <% if @sections.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="4" align="center" style="font-size: 0.9em">
+              Aucune rubrique
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+    
+  </div>
+
+<%end%>
+
+

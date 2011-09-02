@@ -1,0 +1,58 @@
+<% content_for :current_page, :blogs %>
+<% content_for :current_action, :index %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/posts/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+
+          <th style="text-align: left; white-space:nowrap">Titre</th>
+          <th style="text-align: left; white-space:nowrap">Publié le</th>
+          <th style="text-align: left; white-space:nowrap">Expire le</th>
+          <th style="text-align: left; white-space:nowrap">En page d'accueil?</th>
+          <th align="center">Actions</th>
+        </tr>
+        <%
+
+        @posts.each do |post| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%post.id%>">
+
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to post.title.blank? ? "" : post.title,
+                edit_admin_post_path(post.id) %>
+            </td>
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to post.published_at.blank? ? "Non publié" : I18n.l(post.published_at, :format => :ddmmyy) ,
+                edit_admin_post_path(post.id) %>
+            </td>
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to post.expired_at.blank? ? "jamais" : I18n.l(post.expired_at, :format => :ddmmyy) ,
+                edit_admin_post_path(post.id) %>
+            </td>
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to post.is_highlighted? ? "Oui" : "Non",
+                 toggle_highlighted_admin_post_path(post.id) %>
+            </td>
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_post_path(post), :method => :get %>
+              <%= button_to "Supprimer", admin_post_path(post), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <% if @posts.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="5" align="center" style="font-size: 0.9em">
+              Aucun post
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+
+  </div>
+
+<%end%>
+
+

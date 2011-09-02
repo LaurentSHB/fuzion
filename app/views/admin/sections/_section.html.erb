@@ -1,0 +1,29 @@
+<div class="block_details">
+    <% if f.object.errors.any? %>
+    <div id="errorExplanation">
+      <h3>Ce formulaire contient des erreurs:</h3>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+<%= text_field_sthb f, :title, "Nom de la rubrique", "required" %>
+    
+    <fieldset>
+  <legend>Référencement</legend>
+  <%= text_field_sthb f, :seo_title, "Titre de la page", "optional" %>
+  <%= text_field_sthb f, :seo_keywords, "Mots clés", "optional" %>
+  <%= text_field_sthb f, :seo_description, "Description", "optional" %>
+</fieldset>
+
+
+  <div class="required" style="clear: both">
+  <label>&nbsp;</label>
+  <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_section').submit()", :class => "awesome green" %>&nbsp;
+  <%= link_to "Annuler", :back, :class => "awesome grey" %>
+</div>
+  </fieldset>
+</div>
