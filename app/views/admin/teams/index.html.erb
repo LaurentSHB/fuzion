@@ -1,0 +1,43 @@
+<% content_for :current_page, :teams %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/teams/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+          <th style="text-align: left; white-space:nowrap">Nom</th>
+          <th>Localité</th>
+          <th align="center">Actions</th>
+        </tr>
+        <% @teams.each do |team| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%team.id%>">
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to team.name, edit_admin_team_path(team.id) %>
+            </td>
+
+            <td>
+              <%= link_to team.city.to_s, edit_admin_team_path(team.id) %>
+            </td>
+            
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_team_path(team), :method => :get %>
+              <%= button_to "Supprimer", admin_team_path(team), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <% if @teams.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="4" align="center" style="font-size: 0.9em">
+              Aucune rubrique
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+    
+  </div>
+
+<%end%>
+
+

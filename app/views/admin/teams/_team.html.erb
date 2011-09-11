@@ -1,0 +1,27 @@
+<div class="block_details">
+  <% if f.object.errors.any? %>
+    <div id="errorExplanation">
+      <h3>Ce formulaire contient des erreurs:</h3>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <%= text_field_sthb f, :name, "Nom", "required" %>
+    <%= text_field_sthb f, :city, "Localité", "required" %>
+    <div class="required">
+      <label>Est la Fuzion?</label>
+      <span><%= f.radio_button :is_fuzion, true %>Oui</span>
+      <span><%= f.radio_button :is_fuzion, false %>Non</span>
+    </div>
+
+    <div class="required" style="clear: both">
+      <label>&nbsp;</label>
+      <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_team').submit()", :class => "awesome green" %>&nbsp;
+      <%= link_to "Annuler", :back, :class => "awesome grey" %>
+    </div>
+  </fieldset>
+</div>

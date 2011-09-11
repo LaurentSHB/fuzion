@@ -4,6 +4,7 @@ Fuzion::Application.routes.draw do
   namespace :admin do
 
     resources :users 
+    resources :teams
     resources :posts do
       member do
         get 'toggle_highlighted'

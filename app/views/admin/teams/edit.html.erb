@@ -1,0 +1,21 @@
+<% content_for :current_page, :teams %>
+<%= render :layout => 'layout' do %>
+  <%= render :partial => 'admin/teams/left_tree' %>
+  <div class="right_content">
+         <div id="commentWrapper">
+      <div id="comment">
+      <h4>Edition de <strong><i><%= @team.name %></i></strong></h4>
+      <div class="toolbar">
+    <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_team').submit()", :class => "awesome green" %>&nbsp;
+    <%= link_to "Annuler", :back, :class => "awesome grey" %>
+      </div>
+      </div>
+      </div>
+    <%= form_for(@team, :as => :team, :url => admin_team_path(@team),
+      :html => {:multipart => true, :id => "form_team"}) do |f| %>
+      <%= render :partial => "admin/teams/team",
+        :locals => {:f => f, :button_name => "Enregistrer"} %>
+    <% end %>
+  </div>
+<%end%>
+
