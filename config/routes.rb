@@ -5,6 +5,7 @@ Fuzion::Application.routes.draw do
 
     resources :users 
     resources :teams
+    resources :competitions
     resources :posts do
       member do
         get 'toggle_highlighted'

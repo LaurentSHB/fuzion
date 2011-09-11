@@ -10,11 +10,13 @@ class Admin::TeamsController < Admin::AreaController
 
   def new
     @team = Team.new
+    @team.team_competitions.build
   end
 
   def create
     @team = Team.new(params[:team])
 
+    
     if @team.save
       flash[:notice] = "L'équipe a été ajoutée avec succès!"
       redirect_to admin_teams_path
@@ -24,12 +26,26 @@ class Admin::TeamsController < Admin::AreaController
     end
   end
   def edit
-
+    @team.team_competitions.build
   end
   def update
+    params[:team][:team_competitions_attributes].each do |p|
+      if p.last[:competition_id].blank? && p.last[:id].blank?
+        params[:team][:team_competitions_attributes].delete(p.first)
+      end
+    end
+
+    
+
     @team.attributes = params[:team]
-
-
+   
+    if !params[:delete_team_competition].blank?
+      params[:delete_team_competition].each do |d|
+        tc = @team.team_competitions.find d.first
+        tc.destroy
+      end
+    end
+    
     if @team.save
       flash[:notice] = "L'équipe a été mise à jour avec succès!"
       redirect_to admin_teams_path

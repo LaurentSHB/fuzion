@@ -1,0 +1,47 @@
+<% content_for :current_page, :competitions %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/competitions/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+          <th style="text-align: left; white-space:nowrap">Nom</th>
+          <th>Année</th>
+          <th>Type</th>
+          <th align="center">Actions</th>
+        </tr>
+        <% @competitions.each do |competition| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%competition.id%>">
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to competition.name, edit_admin_competition_path(competition.id) %>
+            </td>
+
+            <td>
+              <%= link_to competition.year.to_s, edit_admin_competition_path(competition.id) %>
+            </td>
+            <td>
+              <%= link_to competition.competition_type.to_s, edit_admin_competition_path(competition.id) %>
+            </td>
+            
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_competition_path(competition), :method => :get %>
+              <%= button_to "Supprimer", admin_competition_path(competition), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <% if @competitions.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="4" align="center" style="font-size: 0.9em">
+              Aucune rubrique
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+    
+  </div>
+
+<%end%>
+
+

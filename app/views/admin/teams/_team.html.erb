@@ -17,7 +17,29 @@
       <span><%= f.radio_button :is_fuzion, true %>Oui</span>
       <span><%= f.radio_button :is_fuzion, false %>Non</span>
     </div>
-
+    <fieldset>
+      <legend>Compétitions</legend>
+      <table>
+        <tr>
+          <th style="width:100px">Nom</th>
+          <th style="width:200px">Pénalités</th>
+          <th style="width:50px">Suppr.</th>
+        </tr>
+        <%= f.fields_for :team_competitions do |f_tc| %>
+          <tr>
+            <td>
+              <% if f_tc.object.id.blank? %>
+                <%= f_tc.select :competition_id, [[""]] + (Competition.all - @team.competitions).collect{|c| [c.name, c.id]} %>
+              <% else %>
+                <%= f_tc.object.competition.name rescue nil%>
+              <% end %>
+            </td>
+            <td><%= f_tc.text_field :penalty, :size => 5 %></td>
+            <td><%= check_box_tag "delete_team_competition[#{f_tc.object.id}]", 1, false if !f_tc.object.id.blank? %></td>
+          </tr>
+        <% end %>
+      </table>
+    </fieldset>
     <div class="required" style="clear: both">
       <label>&nbsp;</label>
       <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_team').submit()", :class => "awesome green" %>&nbsp;
