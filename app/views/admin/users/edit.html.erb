@@ -1,0 +1,21 @@
+<% content_for :current_page, :users %>
+<%= render :layout => 'layout' do %>
+  <%= render :partial => 'admin/users/left_tree' %>
+  <div class="right_content">
+         <div id="commentWrapper">
+      <div id="comment">
+      <h4>Edition de <strong><i><%= @user.full_name %></i></strong></h4>
+      <div class="toolbar">
+    <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_user').submit()", :class => "awesome green" %>&nbsp;
+    <%= link_to "Annuler", :back, :class => "awesome grey" %>
+      </div>
+      </div>
+      </div>
+    <%= form_for(@user, :as => :user, :url => admin_user_path(@user),
+      :html => {:multipart => true, :id => "form_user"}) do |f| %>
+      <%= render :partial => "admin/users/user",
+        :locals => {:f => f, :button_name => "Enregistrer"} %>
+    <% end %>
+  </div>
+<%end%>
+

@@ -3,9 +3,7 @@ Fuzion::Application.routes.draw do
 
   namespace :admin do
 
-    resources :sections do
-      put :update_position, :on => :member
-    end
+    resources :users 
     resources :posts do
       member do
         get 'toggle_highlighted'

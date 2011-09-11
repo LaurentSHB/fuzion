@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname,
+                  :firstname, :number, :poste, :phone, :role
 
   def is_admin?
     self.role == "admin"
@@ -17,5 +18,9 @@ class User < ActiveRecord::Base
 
   def is_admin_or_super_admin?
     self.is_admin? || self.is_super_admin?
+  end
+
+  def full_name
+    "#{self.firstname} #{self.lastname}"
   end
 end

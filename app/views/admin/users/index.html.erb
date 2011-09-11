@@ -1,0 +1,53 @@
+<% content_for :current_page, :users %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/users/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+    
+          <th style="width:20px">Numéro</th>
+          <th style="text-align: left; white-space:nowrap">Nom</th>
+          <th>Poste</th>
+          <th>Rôle</th>
+          <th align="center">Actions</th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%user.id%>">
+           
+            <td  style="width:20px">
+              <%= link_to user.number.to_s, edit_admin_user_path(user.id) %>
+            </td>
+            <td style="text-align: left; white-space:nowrap">
+              <%= link_to user.full_name, edit_admin_user_path(user.id) %>
+            </td>
+
+            <td>
+              <%= link_to user.poste.to_s, edit_admin_user_path(user.id) %>
+            </td>
+            <td>
+              <%= link_to user.role.to_s, edit_admin_user_path(user.id) %>
+            </td>
+            
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_user_path(user), :method => :get %>
+              <%= button_to "Supprimer", admin_user_path(user), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <% if @users.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="4" align="center" style="font-size: 0.9em">
+              Aucune rubrique
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+    
+  </div>
+
+<%end%>
+
+

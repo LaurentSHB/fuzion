@@ -1,0 +1,37 @@
+<div class="block_details">
+  <% if f.object.errors.any? %>
+    <div id="errorExplanation">
+      <h3>Ce formulaire contient des erreurs:</h3>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <%= text_field_sthb f, :email, "Email", "required" %>
+    <div class="<%= @user.new_record? ? "required" : "optional" %>">
+      <label for="user_password">
+        Mot de passe:
+      </label>
+      <%= f.text_field :password, :size => 41 %>
+    </div>
+    <%= text_field_sthb f, :lastname, "Nom", "required" %>
+    <%= text_field_sthb f, :firstname, "Prénom", "required" %>
+    <%= text_field_sthb f, :poste, "Poste", "required" %>
+    <%= text_field_sthb f, :number, "Numéro", "required" %>
+    <div class="required">
+      <label>Role</label>
+      <span><%= f.radio_button :role, "user" %>Utilisateur</span>
+      <span><%= f.radio_button :role, "admin" %>Admin</span>
+      <span><%= f.radio_button :role, "super_admin" %>Super Admin</span>
+    </div>
+
+    <div class="required" style="clear: both">
+      <label>&nbsp;</label>
+      <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_user').submit()", :class => "awesome green" %>&nbsp;
+      <%= link_to "Annuler", :back, :class => "awesome grey" %>
+    </div>
+  </fieldset>
+</div>
