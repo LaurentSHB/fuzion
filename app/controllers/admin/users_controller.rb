@@ -1,6 +1,9 @@
 #encoding: utf-8
 class Admin::UsersController < Admin::AreaController
-  before_filter :find_user, :only => [ :edit, :update, :destroy, :update_position ]
+  before_filter :authorized_for_super_admin
+  
+  before_filter :find_user, :only => [ :edit, :update, :destroy ]
+
   def index
     @users = User.all(:order => "id ASC")
   end
@@ -53,4 +56,7 @@ class Admin::UsersController < Admin::AreaController
     @user = User.find params[:id]
   end
 
+  def authorized_for_super_admin
+    authorize! :view_super_admin_side, nil
+  end
 end

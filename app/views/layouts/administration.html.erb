@@ -64,7 +64,7 @@
         <ul>
 
           <li><%= link_to 'Accueil',  admin_root_path, :class => (yield :current_page) == 'home' ? 'current' : nil%></li>
-          <li><%= link_to 'Utilisateurs',  admin_users_path,:class => (yield :current_page) == 'users' ? 'current' : nil %></li>
+          <li><%= link_to 'Utilisateurs',  admin_users_path,:class => (yield :current_page) == 'users' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
           <li><%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %></li>
           
         </ul>

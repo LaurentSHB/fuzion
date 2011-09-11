@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname,
-                  :firstname, :number, :poste, :phone, :role
+                  :firstname, :number, :poste, :phone, :role, :active
+
+  POSTES = ["Gardien", "Defenseur", "Milieu", "Attaquant"]
 
   def is_admin?
     self.role == "admin"

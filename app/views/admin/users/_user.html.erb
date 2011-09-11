@@ -19,13 +19,21 @@
     </div>
     <%= text_field_sthb f, :lastname, "Nom", "required" %>
     <%= text_field_sthb f, :firstname, "Prénom", "required" %>
-    <%= text_field_sthb f, :poste, "Poste", "required" %>
+    <div class="required">
+      <label>Poste</label>
+      <%= f.select :poste, User::POSTES %>
+    </div>
     <%= text_field_sthb f, :number, "Numéro", "required" %>
     <div class="required">
       <label>Role</label>
       <span><%= f.radio_button :role, "user" %>Utilisateur</span>
       <span><%= f.radio_button :role, "admin" %>Admin</span>
       <span><%= f.radio_button :role, "super_admin" %>Super Admin</span>
+    </div>
+    <div class="required">
+      <label>Actif?</label>
+      <span><%= f.radio_button :active, true %>Oui</span>
+      <span><%= f.radio_button :active, false %>Non</span>
     </div>
 
     <div class="required" style="clear: both">

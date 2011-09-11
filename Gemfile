@@ -25,6 +25,7 @@ gem "will_paginate"
 gem 'devise'
 gem 'acts_as_list'
 
+gem 'cancan'
 # Use unicorn as the web server
 # gem 'unicorn'
 
