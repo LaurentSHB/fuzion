@@ -298,6 +298,8 @@ table tr{border:1px solid #999; width:100%; padding:0; margin:0}
 table tr th{background-color:#E3E3E3; padding:5px; color:#333}
 table tr td{width:100%; background-color:#fff;padding:5px;}
 
+.result table tr td{width:100%; background-color:#fff;padding:1px; text-align:center}
+
 .info_content{ display:block; float: left; width:100%; padding:10px 0}
 div.jquery_button a{ padding:0; margin:0; background-color:#B5CF74; color:#fff; border:0px; font-size:0.8em}
 

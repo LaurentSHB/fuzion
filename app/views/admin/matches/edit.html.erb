@@ -1,0 +1,21 @@
+<% content_for :current_page, :competitions %>
+<%= render :layout => 'layout' do %>
+  <%= render :partial => 'admin/competitions/left_tree' %>
+  <div class="right_content">
+         <div id="commentWrapper">
+      <div id="comment">
+      <h4>Edition de <strong><i><%= @competition.name %></i></strong></h4>
+      <div class="toolbar">
+    <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_competition').submit()", :class => "awesome green" %>&nbsp;
+    <%= link_to "Annuler", :back, :class => "awesome grey" %>
+      </div>
+      </div>
+      </div>
+    <%= form_for(@competition, :as => :competition, :url => admin_competition_path(@competition),
+      :html => {:multipart => true, :id => "form_competition"}) do |f| %>
+      <%= render :partial => "admin/competitions/competition",
+        :locals => {:f => f, :button_name => "Enregistrer"} %>
+    <% end %>
+  </div>
+<%end%>
+

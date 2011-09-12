@@ -5,21 +5,18 @@
     <title>Portail 6ème sens Administration - <%= yield :page_title %></title>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript" charset="utf-8">google.load("jquery", "1.6.1");</script>
-
-    
-    <script type="text/javascript">google.load("jqueryui", "1.8.13");</script>
     <%= #Bien laisser cette ligne après le chargement de jquery car rails.js surcharge les fonctions de jquery
-    javascript_include_tag 'rails','application','jquery.ui.datepicker-fr-CH', 'jquery.prettyPhoto' %>
-    
+    javascript_include_tag 'application','jquery.ui.datepicker-fr-CH'#, 'jquery.prettyPhoto'
+    %>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("jqueryui", "1.8.13");</script>
     <%= stylesheet_link_tag 'back_office',  'jquery_smoothness/jquery-ui-1.8.4.custom.css' %>
         
 <%#= javascript_include_tag :defaults %>
         <%= csrf_meta_tag %>
   <!-- Load TinyMCE -->
-<%=  javascript_include_tag  'tiny_mce/jquery.tinymce.js' %>
-<script type="text/javascript">
+<%#=  javascript_include_tag  'tiny_mce/jquery.tinymce.js' %>
+<!--<script type="text/javascript">
 	$(function() {
 		$('textarea.tinymce').tinymce({
 			// Location of TinyMCE script
@@ -67,6 +64,7 @@
           <li><%= link_to 'Utilisateurs',  admin_users_path,:class => (yield :current_page) == 'users' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
           <li><%= link_to 'Equipes',  admin_teams_path,:class => (yield :current_page) == 'teams' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
           <li><%= link_to 'Compétitions',  admin_competitions_path,:class => (yield :current_page) == 'competitions' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
+          <li><%= link_to 'Matchs',  admin_matches_path,:class => (yield :current_page) == 'matches' ? 'current' : nil if can? :view_admin_side, nil %></li>
           <li><%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %></li>
           
         </ul>

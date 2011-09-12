@@ -1,0 +1,87 @@
+<% content_for :current_page, :matches %>
+<%=  render :layout => 'layout' do %>
+  <%= render :partial => 'admin/matches/left_tree' %>
+  <div class="right_content" style="padding-bottom:90px">
+    <div class="info_content result" style=" display:block;top:15px; ">
+      <table>
+        <tr class="first">
+          <th>Compétition</th>
+          <th>Journée</th>
+          <th>Eq Domicile</th>
+          <th>Résultat</th>
+          <th>Eq Ext</th>
+          <th>Heure</th>
+          <th>Action</th>
+        </tr>
+        <% @matches.each do |match| %>
+          <tr class="<%= cycle('light', 'shade') %>" id="details_<%match.id%>">
+            <td style="width:150px">
+              <%= link_to match.competition.name, edit_admin_match_path(match.id) %>
+            </td>
+            <td style="width:100px">
+              <%= link_to match.day_number, edit_admin_match_path(match.id) %>
+            </td>
+            <td style="width:150px">
+              <%= link_to match.team_dom.name, edit_admin_match_path(match.id) %>
+            </td>
+            <td style="width:100px"> </td>
+            <td style="width:150px">
+              <%= link_to match.team_ext.name, edit_admin_match_path(match.id) %>
+            </td>
+            <td style="width:150px">
+              <%= link_to I18n.l(match.date, :format => :long), edit_admin_match_path(match.id)  rescue ""%>
+            </td>
+
+            <td align="center">
+              <%= button_to "Modifier", edit_admin_match_path(match), :method => :get, :style => "float:left"  %>
+              <%= button_to "Suppr", admin_match_path(match), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <%= form_for(@match, :as => :match, :url => admin_matches_path,
+            :html => {:multipart => true, :id => "form_match"}) do |f| %>
+            <td style="width:150px"><%= f.select :competition_id, Competition.all.collect{|c| [c.name, c.id]} %></td>
+            <td style="width:100px"><%= f.text_field :day_number, :size => 1 %></td>
+            <td style="width:150px"><%= f.select :team_dom_id, Team.all.collect{|t| [t.name, t.id]} %></td>
+            <td style="width:100px"></td>
+            <td style="width:150px"><%= f.select :team_ext_id, Team.all.collect{|t| [t.name, t.id]} %></td>
+            <td style="width:150px">
+              <%= f.text_field :hour_for_date, :size => 1 %>:
+              <%= f.text_field :minute_for_date, :size => 1 %>
+              
+          <%= f.text_field :date, :size => 10 %>
+            <%#=  text_field_tag "match[date]", "",:id => "match_date" %>
+    <script type="text/javascript">
+      $(function() {
+        $("#match_date").datepicker({
+          showOn: 'button',
+          buttonImage: '/assets/admin/calendar.png',
+          buttonImageOnly: true,
+          buttonText: 'Cliquez ici pour afficher le calendrier',
+          dateFormat: 'dd-mm-yy'
+        });
+      });
+    </script>
+
+            </td>
+            <td><%= f.submit "Créer" %></td>
+
+          <% end %>
+        </tr>
+        <% if @matches.empty? %>
+          <tr class="<%= cycle('light', 'shade') %>">
+            <td colspan="7" align="center" style="font-size: 0.9em">
+              Aucun match
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+
+  </div>
+
+<%end%>
+
+
