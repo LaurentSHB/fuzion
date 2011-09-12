@@ -1,8 +1,7 @@
 <% content_for :current_page, :matches %>
 <%=  render :layout => 'layout' do %>
-  <%= render :partial => 'admin/matches/left_tree' %>
-  <div class="right_content" style="padding-bottom:90px">
-    <div class="info_content result" style=" display:block;top:15px; ">
+  <div class="right_content result" style="padding-bottom:90px">
+    <div class="info_content " style=" display:block;top:15px; ">
       <table>
         <tr class="first">
           <th>Compétition</th>
@@ -14,17 +13,22 @@
           <th>Action</th>
         </tr>
         <% @matches.each do |match| %>
-          <tr class="<%= cycle('light', 'shade') %>" id="details_<%match.id%>">
+          <tr class="<%= cycle('light', 'shade') %> <%= match.competition.competition_type.downcase %>" id="details_<%match.id%>">
             <td style="width:150px">
               <%= link_to match.competition.name, edit_admin_match_path(match.id) %>
             </td>
             <td style="width:100px">
-              <%= link_to match.day_number, edit_admin_match_path(match.id) %>
+              <%= link_to match.day_number.to_s, edit_admin_match_path(match.id) %>
             </td>
             <td style="width:150px">
               <%= link_to match.team_dom.name, edit_admin_match_path(match.id) %>
             </td>
-            <td style="width:100px"> </td>
+            <td style="width:100px"> 
+              <%= form_for(match, :as => :match, :url => admin_match_path(match)) do |f| %>
+              <%= f.text_field :score_dom, :size => 1 %>-
+              <%= f.text_field :score_ext, :size => 1 %>
+              <% end %>
+            </td>
             <td style="width:150px">
               <%= link_to match.team_ext.name, edit_admin_match_path(match.id) %>
             </td>

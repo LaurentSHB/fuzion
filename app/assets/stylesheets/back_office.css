@@ -297,8 +297,15 @@ table{ display:block; float:left; background-color:#EDF0F4; font-size:0.8em; wid
 table tr{border:1px solid #999; width:100%; padding:0; margin:0}
 table tr th{background-color:#E3E3E3; padding:5px; color:#333}
 table tr td{width:100%; background-color:#fff;padding:5px;}
-
-.result table tr td{width:100%; background-color:#fff;padding:1px; text-align:center}
+.right_content.result{width:1000px}
+.result table{width:1000px; background: white}
+.result table tr td{width: 150px;padding:1px; text-align:center}
+.coupe.light td{background-color: #F8E0E0}
+.coupe.shade td{background-color: #F6D8CE}
+.championnat.light td{background-color: #F2F2F2}
+.championnat.shade td{background-color: #E8E8E8}
+.amical.light td{background-color: #E3F6CE}
+.amical.shade td{background-color: #D0F5A9}
 
 .info_content{ display:block; float: left; width:100%; padding:10px 0}
 div.jquery_button a{ padding:0; margin:0; background-color:#B5CF74; color:#fff; border:0px; font-size:0.8em}

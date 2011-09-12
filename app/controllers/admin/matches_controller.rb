@@ -5,7 +5,7 @@ class Admin::MatchesController < Admin::AreaController
 
   def index
     #request = params[:filter_by_team]
-    @matches = Match.all(:order => "date DESC")
+    @matches = Match.all(:order => "date ASC")
     @match = Match.new
   end
 
