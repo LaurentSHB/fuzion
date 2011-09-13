@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   POSTES = ["Gardien", "Defenseur", "Milieu", "Attaquant"]
 
+  has_many :participations
+
+  scope :actived, where(["active = ?", true])
   def is_admin?
     self.role == "admin"
   end

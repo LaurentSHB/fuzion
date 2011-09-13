@@ -9,6 +9,7 @@ Fuzion::Application.routes.draw do
     resources :matches do
       member do
         get :scoresheet
+        put :update_scoresheet
       end
     end
     resources :posts do

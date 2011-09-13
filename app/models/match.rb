@@ -20,6 +20,11 @@ class Match < ActiveRecord::Base
   belongs_to :player_7, :class_name => "User"
   belongs_to :player_7_bis, :class_name => "User"
 
+  has_many :participations
+  has_many :players, :through => :participations, :source => :user, :conditions => ["convocation = ?", true]
+  has_many :presents, :through => :participations, :source => :user, :conditions => ["presence = ?", "P"]
+  has_many :absents, :through => :participations, :source => :user, :conditions => ["presence = ?", "A"]
+
   validates :competition_id, :presence => true
   validates :team_dom_id, :presence => true
   validates :team_ext_id, :presence => true
@@ -28,6 +33,7 @@ class Match < ActiveRecord::Base
 
   before_validation :add_minute_and_hour_to_date
 
+  accepts_nested_attributes_for :participations
 #A modifier en cas d'édition
   def add_minute_and_hour_to_date
     self.date = Date.today if self.date.blank?

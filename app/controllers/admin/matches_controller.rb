@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Admin::MatchesController < Admin::AreaController
   
-  before_filter :find_match, :only => [ :edit, :update, :destroy, :scoresheet ]
+  before_filter :find_match, :only => [ :edit, :update, :destroy, :scoresheet, :update_scoresheet ]
 
   def index
     ary_for_request = [""]
@@ -70,7 +70,45 @@ class Admin::MatchesController < Admin::AreaController
   end
 
   def scoresheet
-    
+    (9 - @match.players.count).times{ @match.participations.build }
+    @match.participations.build
+    @users_for_select = [[""]] + (User.actived - @match.players).collect{|u| [u.full_name, u.id]}
+    @presents = @match.presents
+    @absents = @match.absents
+    @presence_unknown = User.actived - @presents - @absents
+  end
+
+
+  def update_scoresheet
+    if !params[:unsubscribe].blank?
+      params[:unsubscribe].each do |participation_id|
+        p = Participation.find participation_id.first
+        p.convocation = false
+        p.save
+      end
+    end
+
+
+    params[:match][:participations_attributes].each do |participation|
+      part = participation.last
+      if part[:id].blank? && part[:user_id].blank?
+        params[:match][:participations_attributes].delete(participation.first)
+      end
+      if part[:id].blank? && !part[:user_id].blank?
+        p = Participation.find_by_user_id_and_match_id part[:user_id], @match.id
+        if !p.blank?
+          params[:match][:participations_attributes][participation.first][:id] = p.id
+        end
+      end
+    end
+    #raise params[:match][:participations_attributes].inspect
+    if @match.update_attributes(params[:match])
+      flash[:notice] = "Feuille de match enregistrée"
+    else
+      flash[:error] = "Problème lors de l'enregistrement"
+    end
+
+    redirect_to scoresheet_admin_match_path(@match)
   end
 
 
