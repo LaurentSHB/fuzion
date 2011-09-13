@@ -128,7 +128,7 @@ li.boolean input { text-align:left; float: right;}
 
 div.jquery_button a{ padding:0; margin:0; background-color:#B5CF74; color:#fff; border:0px; font-size:0.8em}
 
-.right_content{ display:block; float:left; position:relative; width:70%; border:1px solid #ccc; background-color:#fff; margin:10px 5px; padding:65px 0 20px 0;-moz-border-radius: 3px; -webkit-border-radius: 3px;
+.right_content{ display:block; float:left; position:relative; width:70%; border:1px solid #ccc; background-color:#fff; margin:10px 5px; padding:10px 0 20px 0;-moz-border-radius: 3px; -webkit-border-radius: 3px;
 	border-radius: 3px;
 	-moz-box-shadow: 0 rgba(0,0,0,0.3);s
 	-webkit-box-shadow: 0 rgba(0,0,0,0.3);
@@ -392,8 +392,8 @@ div.jquery_button a{ padding:0; margin:0; background-color:#B5CF74; color:#fff; 
 }
 
 #commentWrapper { /* required to avoid jumping */
-  left: 15pxpx;
-  position: absolute;
+  margin-left: 5px;
+  /*position: absolute;*/
   top:15px
 }
 

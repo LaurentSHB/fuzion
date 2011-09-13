@@ -6,7 +6,11 @@ Fuzion::Application.routes.draw do
     resources :users 
     resources :teams
     resources :competitions
-    resources :matches
+    resources :matches do
+      member do
+        get :scoresheet
+      end
+    end
     resources :posts do
       member do
         get 'toggle_highlighted'

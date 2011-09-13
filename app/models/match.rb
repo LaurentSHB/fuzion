@@ -37,4 +37,7 @@ class Match < ActiveRecord::Base
     self.date += self.hour_for_date.to_i.hours if !self.hour_for_date.blank?
   end
 
+  def fuzion_play?
+    self.team_dom.is_fuzion || self.team_ext.is_fuzion
+  end
 end

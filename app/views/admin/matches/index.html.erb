@@ -1,6 +1,13 @@
 <% content_for :current_page, :matches %>
 <%=  render :layout => 'layout' do %>
   <div class="right_content result" style="padding-bottom:90px">
+    <div>
+      <%= form_tag admin_matches_path, :method => :get do  %>
+        <%= select_tag "filter_by_team", options_for_select([["Selectionnez une equipe", ""]] + @teams_for_select, params[:filter_by_team].to_i), :onchange => "this.form.submit()" %>
+        <%= select_tag "filter_by_month", options_for_select([["Selectionnez un mois", ""]] + [["Janvier", 1], ["Février", 2], ["Mars",3], ["Avril",4], ["Mai",5], ["Juin",6], ["Juillet",7], ["Août",8], ["Septembre",9], ["Octobre",10], ["Novembre",11], ["Décembre",12]], @month), :onchange => "this.form.submit()" %>
+        <%= select_tag "filter_by_year", options_for_select([["Selectionnez une année", ""]] + [2008,2009,2010,2011,2012,2013], @year), :onchange => "this.form.submit()" %>
+      <% end %>
+    </div>
     <div class="info_content " style=" display:block;top:15px; ">
       <table>
         <tr class="first">
@@ -23,10 +30,16 @@
             <td style="width:150px">
               <%= link_to match.team_dom.name, edit_admin_match_path(match.id) %>
             </td>
-            <td style="width:100px"> 
-              <%= form_for(match, :as => :match, :url => admin_match_path(match)) do |f| %>
-              <%= f.text_field :score_dom, :size => 1 %>-
-              <%= f.text_field :score_ext, :size => 1 %>
+            <td style="width:100px">
+              <%= form_for(match, :as => :match, :url => admin_match_path(match), :remote => :true) do |f| %>
+                <%= f.text_field :score_dom, :size => 1, :onchange => "$('#valid_match_#{match.id}').show();$('#ok_match_#{match.id}').hide()" %>-
+                <%= f.text_field :score_ext, :size => 1, :onchange => "$('#valid_match_#{match.id}').show();$('#ok_match_#{match.id}').hide()" %>
+                <div style="display:none" id="valid_match_<%= match.id %>">
+                  <%= f.submit "valider" %>
+                </div>
+                <div style="display:none" id="ok_match_<%= match.id %>">
+                  Résultat validé
+                </div>
               <% end %>
             </td>
             <td style="width:150px">
@@ -37,8 +50,12 @@
             </td>
 
             <td align="center">
-              <%= button_to "Modifier", edit_admin_match_path(match), :method => :get, :style => "float:left"  %>
-              <%= button_to "Suppr", admin_match_path(match), :confirm => 'Etes-vous sûr ?', :method => :delete%>
+              <%=  %>
+              <%= link_to image_tag("admin/information.png"), scoresheet_admin_match_path(match) if match.fuzion_play? %>
+              <%= link_to image_tag("admin/edit.png"), edit_admin_match_path(match) %>
+              <%= link_to image_tag("admin/delete_rouge.png"), admin_match_path(match), :confirm => 'Etes-vous sûr ?', :method => :delete %>
+<%#= button_to "Modifier", edit_admin_match_path(match), :method => :get, :style => "float:left"  %>
+              <%#= button_to "Suppr", admin_match_path(match), :confirm => 'Etes-vous sûr ?', :method => :delete%>
             </td>
           </tr>
         <% end %>
@@ -47,26 +64,26 @@
             :html => {:multipart => true, :id => "form_match"}) do |f| %>
             <td style="width:150px"><%= f.select :competition_id, Competition.all.collect{|c| [c.name, c.id]} %></td>
             <td style="width:100px"><%= f.text_field :day_number, :size => 1 %></td>
-            <td style="width:150px"><%= f.select :team_dom_id, Team.all.collect{|t| [t.name, t.id]} %></td>
+            <td style="width:150px"><%= f.select :team_dom_id, @teams_for_select %></td>
             <td style="width:100px"></td>
-            <td style="width:150px"><%= f.select :team_ext_id, Team.all.collect{|t| [t.name, t.id]} %></td>
+            <td style="width:150px"><%= f.select :team_ext_id, @teams_for_select %></td>
             <td style="width:150px">
               <%= f.text_field :hour_for_date, :size => 1 %>:
               <%= f.text_field :minute_for_date, :size => 1 %>
-              
-          <%= f.text_field :date, :size => 10 %>
-            <%#=  text_field_tag "match[date]", "",:id => "match_date" %>
-    <script type="text/javascript">
-      $(function() {
-        $("#match_date").datepicker({
-          showOn: 'button',
-          buttonImage: '/assets/admin/calendar.png',
-          buttonImageOnly: true,
-          buttonText: 'Cliquez ici pour afficher le calendrier',
-          dateFormat: 'dd-mm-yy'
-        });
-      });
-    </script>
+
+              <%= f.text_field :date, :size => 10 %>
+    <%#=  text_field_tag "match[date]", "",:id => "match_date" %>
+              <script type="text/javascript">
+                $(function() {
+                  $("#match_date").datepicker({
+                    showOn: 'button',
+                    buttonImage: '/assets/admin/calendar.png',
+                    buttonImageOnly: true,
+                    buttonText: 'Cliquez ici pour afficher le calendrier',
+                    dateFormat: 'dd-mm-yy'
+                  });
+                });
+              </script>
 
             </td>
             <td><%= f.submit "Créer" %></td>

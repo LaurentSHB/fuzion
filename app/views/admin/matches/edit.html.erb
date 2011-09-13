@@ -1,20 +1,67 @@
-<% content_for :current_page, :competitions %>
+<% content_for :current_page, :matches %>
 <%= render :layout => 'layout' do %>
-  <%= render :partial => 'admin/competitions/left_tree' %>
   <div class="right_content">
-         <div id="commentWrapper">
+    <div id="commentWrapper">
       <div id="comment">
-      <h4>Edition de <strong><i><%= @competition.name %></i></strong></h4>
-      <div class="toolbar">
-    <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_competition').submit()", :class => "awesome green" %>&nbsp;
-    <%= link_to "Annuler", :back, :class => "awesome grey" %>
+        <h4>Edition de <strong><i><%= @match.team_dom.name %> - <%= @match.team_ext.name %></i></strong></h4>
+        <div class="toolbar">
+          <%= link_to "Enregistrer", "javascript:void(0)", :onclick => "$('#form_match').submit()", :class => "awesome green" %>&nbsp;
+          <%= link_to "Annuler", :back, :class => "awesome grey" %>
+        </div>
       </div>
+    </div>
+    <%= form_for(@match, :as => :match, :url => admin_match_path(@match),
+      :html => {:multipart => true, :id => "form_match"}) do |f| %>
+      <div class="block_details">
+        <% if f.object.errors.any? %>
+          <div id="errorExplanation">
+            <h3>Ce formulaire contient des erreurs:</h3>
+            <ul>
+              <% f.object.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <fieldset>
+          <div class="required">
+            <label>Compétition</label>
+            <%= f.select :competition_id, Competition.all.collect{|c| [c.name, c.id]} %>
+          </div>
+          <%= text_field_sthb f, :day_number, "Journée", "optional" %>
+          <div class="required">
+            <label>Equipe Domicile</label>
+            <%= f.select :team_dom_id, @teams_for_select %>
+          </div>
+          <div class="required">
+            <label>Equipe Domicile</label>
+            <%= f.select :team_ext_id, @teams_for_select %>
+          </div>
+          <div class="required">
+            <label>Heure Date</label>
+           <%= f.text_field :hour_for_date, :size => 1 %>
+           <%= f.text_field :minute_for_date, :size => 1 %>
+
+              <%= f.text_field :date, :value => I18n.l(f.object.date, :format => :"dd-mm-yy") %>
+               <script type="text/javascript">
+                $(function() {
+                  $("#match_date").datepicker({
+                    showOn: 'button',
+                    buttonImage: '/assets/admin/calendar.png',
+                    buttonImageOnly: true,
+                    buttonText: 'Cliquez ici pour afficher le calendrier',
+                    dateFormat: 'dd-mm-yy'
+                  });
+                });
+                </script>
+          </div>
+          <div class="required" style="clear: both">
+            <label>&nbsp;</label>
+            <%= link_to "Valider", "javascript:void(0)", :onclick => "$('#form_match').submit()", :class => "awesome green" %>&nbsp;
+            <%= link_to "Annuler", :back, :class => "awesome grey" %>
+          </div>
+        </fieldset>
       </div>
-      </div>
-    <%= form_for(@competition, :as => :competition, :url => admin_competition_path(@competition),
-      :html => {:multipart => true, :id => "form_competition"}) do |f| %>
-      <%= render :partial => "admin/competitions/competition",
-        :locals => {:f => f, :button_name => "Enregistrer"} %>
     <% end %>
   </div>
 <%end%>
