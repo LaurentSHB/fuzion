@@ -26,6 +26,8 @@ gem 'devise'
 gem 'acts_as_list'
 
 gem 'cancan'
+
+gem 'tinymce-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 
