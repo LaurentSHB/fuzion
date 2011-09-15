@@ -32,13 +32,13 @@
               <% if f_part.object.id.blank? || f_part.object.convocation %>
 
                 <% if f_part.object.user.blank? %>
-            <div style="clear:both"><%= idx %>. <%= f_part.select :user_id, @users_for_select %></div>
-            
+                  <div style="clear:both"><%= idx %>. <%= f_part.select :user_id, @users_for_select %></div>
+
                   <%= f_part.hidden_field :convocation, :value => true %>
                 <% else %>
                   <div style="float:left"><%= idx %>. <%= f_part.object.user.full_name %></div><div style="float:left" ><%= check_box_tag "unsubscribe[#{f_part.object.id}]", f_part.object.id, false  %> désinscrire</div>
                   <br />
-        <% end %>
+                <% end %>
                 <% idx += 1 %>
               <% end %>
             <% end %>
@@ -60,6 +60,60 @@
             <% @presence_unknown.each do |unknown| %>
               <%= unknown.full_name %><br />
             <% end %>
+          </div>
+          <div class="required" style="clear: both">
+            <label>&nbsp;</label>
+            <%= link_to "Valider", "javascript:void(0)", :onclick => "$('#form_match').submit()", :class => "awesome green" %>&nbsp;
+            <%= link_to "Annuler", :back, :class => "awesome grey" %>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Match</legend>
+          <table style="width:200px; float:left; margin-top: 30px">
+            <tr>
+              <th>Joueur</th>
+              <th>Buts</th>
+              <th>Passe dec</th>
+            </tr>
+            <%= f.fields_for :participations do |f_part|%>
+              <% if !f_part.object.id.blank? && f_part.object.convocation %>
+                <tr>
+                  <td><%= f_part.object.user.full_name %></td>
+                  <td><%= f_part.text_field :goals, :size => 1 %></td>
+                  <td><%= f_part.text_field :passes, :size => 1 %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+          <div style="float:left; margin-left:50px">
+            <div style="float:left">Composition</div>
+            <% Match::COMPOSITIONS.each do |compo| %>
+              <div style="float:left"><%= f.radio_button :composition, compo.first %> <%= compo.first %></div>
+            <% end %>
+            <% if @match.composition.blank? %>
+              <div>Séléctionne une composition et Valide</div>
+            <% else %>
+              <div>
+                <table style="width:300px">
+                  <tr>
+                    <th>Position</th>
+                    <th>Titulaire</th>
+                    <th>Remplaçant</th>
+                  </tr>
+                  <% Match::COMPOSITIONS[@match.composition].each do |poste| %>
+                    <tr>
+                      <td><%= poste.last %></td>
+                      <td><%= f.select "#{poste.first}_id", [[""]] + @match.players.collect{|p| [p.full_name, p.id]} %></td>
+                      <td><%= f.select "#{poste.first}_bis_id", [[""]] + @match.players.collect{|p| [p.full_name, p.id]} %></td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            <% end %>
+          </div>
+          <div class="optional">
+            <label>Résumé</label>
+            <%= f.text_area :description, :class=> "tinymce", :rows => 20, :cols => 100 %>
           </div>
           <div class="required" style="clear: both">
             <label>&nbsp;</label>
