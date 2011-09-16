@@ -1,14 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Fuzion</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Carré Foch</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <%= stylesheet_link_tag "application" %>
+    <meta name="description" content="#" />
+    <meta name="keywords" content="#" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="language" content="Français" />
+    <meta name="copyright" content=" Studio HB 2011" />
+    <meta name="robots" content="all" />
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">google.load("jquery", "1.6.1");</script>
+    <script type="text/javascript">google.load("jqueryui", "1.8.13");</script>
+    <%= javascript_include_tag  "application" %>
+    <%= csrf_meta_tags %>
 
-<%= yield %>
+  </head>
+  <body id="body">
+    <div class="global">
+      <div class="conteneur">
+        <div class="conteneur_style">
 
-</body>
+          <div class="header">
+            <% if user_signed_in? %>
+              <div class="login">
+                Bienvenue <%= current_user.full_name %>  |
+  <%#=  link_to  "Mon Profil", private_profil_path   %> |
+                <% if current_user.is_admin_or_super_admin? %>
+                  <%=  link_to  "Administration", admin_root_path   %> |
+                <% end %>
+                <%= link_to 'Se déconnecter', destroy_user_session_path %>
+              </div>
+            <% else %>
+              <div class="login">Bienvenue <%= link_to('Identifiez vous', new_user_session_path)  %> </div>
+            <% end %>
+            <div class="header_content">
+              <h1>Parlez Moi d'Immo 2</h1>
+            </div>
+
+          </div>
+          <!-- nice menu -->
+          <div class="navcontainer01">
+            <ul>
+              <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => (yield :current_page) == 'home' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path, :class => (yield :current_page) == 'matches' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "professional" %> ><%#= link_to 'Commerces et services',  professionals_path, :class => (yield :current_page) == 'professional' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "advertisement" %> ><%#= link_to 'Les petites annonces',  advertisements_path, :class => (yield :current_page) == 'advertisement' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "history" %> ><%#= link_to 'Historique',  "/historique.html", :class => (yield :current_page) == 'history' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "contact" %>><%#= link_to 'Contact',  new_contact_path, :class => ((yield :current_page) == 'contact' ? 'first contact_menu' : "contact_menu") %></li>
+            </ul>
+          </div>
+
+
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="footer_style">
+        Site de la Fuzion
+
+      </div>
+    </div>
+  </body>
 </html>
+
+
+
+
+
+

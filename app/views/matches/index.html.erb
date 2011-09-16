@@ -1,0 +1,13 @@
+<% content_for :current_page, :matches %>
+Match
+<table>
+<% @matches.each do |match| %>
+  <tr>
+    <td style="width:100px"><%= I18n.l(match.date, :format => :ddmmyy) %></td>
+    <td style="width:200px"><%= match.team_dom.name %></td>
+    <td style="width:50px"><%= "#{match.score_dom} - #{match.score_ext}" %></td>
+    <td style="width:200px"><%= match.team_ext.name %></td>
+    <td style="width:50px"><%= match.fuzion_play? ? "s'inscrire" : " " %></td>
+  </tr>
+<% end %>
+</table>

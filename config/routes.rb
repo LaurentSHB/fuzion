@@ -21,7 +21,7 @@ Fuzion::Application.routes.draw do
     root :to => "dashboard#index"
   end
 
-
+  resources :matches
 
   root :to => "home#index"
   # The priority is based upon order of creation:
