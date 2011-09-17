@@ -1,13 +1,30 @@
 <% content_for :current_page, :matches %>
 Match
 <table>
-<% @matches.each do |match| %>
-  <tr>
-    <td style="width:100px"><%= I18n.l(match.date, :format => :ddmmyy) %></td>
-    <td style="width:200px"><%= match.team_dom.name %></td>
-    <td style="width:50px"><%= "#{match.score_dom} - #{match.score_ext}" %></td>
-    <td style="width:200px"><%= match.team_ext.name %></td>
-    <td style="width:50px"><%= match.fuzion_play? ? "s'inscrire" : " " %></td>
-  </tr>
-<% end %>
+  <% @matches.each do |match| %>
+    <tr class="<%= match.competition.competition_type.downcase %>">
+      <td style="width:130px"><%= I18n.l(match.date, :format => :long) %></td>
+      <td style="width:200px"><%= match.team_dom.name %></td>
+      <td style="width:50px"><%= "#{match.score_dom} - #{match.score_ext}" %></td>
+      <td style="width:200px"><%= match.team_ext.name %></td>
+      <td style="width:50px">
+        <% if match.fuzion_play? && !current_user.blank? %>
+          <% if match.ended? %>
+            <% if current_user.played?(match) %>
+              <span class="green">A participé</span>
+            <% else %>
+              <span class="red">Pas participé</span>
+            <% end %>
+          <% else %>
+            <% participation = current_user.participations.find_by_match_id(match.id) 
+              presence = participation.blank? || participation.presence_unknown? ? "Disponibilité?" : participation.present? ? "Présent" : "Absent"
+          %>
+            <%= link_to presence, set_participation_match_path(match) %>
+          <% end %>
+        <% else %>
+          &nbsp;
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>

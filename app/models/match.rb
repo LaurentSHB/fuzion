@@ -60,4 +60,12 @@ class Match < ActiveRecord::Base
   def fuzion_play?
     self.team_dom.is_fuzion || self.team_ext.is_fuzion
   end
+
+  def ended?
+    !self.score_dom.blank? || !self.score_ext.blank?
+  end
+
+  def affiche
+    "#{self.team_dom.name} - #{self.team_ext.name}"
+  end
 end

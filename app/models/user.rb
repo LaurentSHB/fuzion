@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   POSTES = ["Gardien", "Defenseur", "Milieu", "Attaquant"]
 
   has_many :participations
+  has_many :matches, :through => :participations
 
   scope :actived, where(["active = ?", true])
   def is_admin?
@@ -27,5 +28,10 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{self.firstname} #{self.lastname}"
+  end
+
+  def played?(match)
+    m = self.participations.find_by_match_id_and_convocation(match.id, true)
+    !m.blank?
   end
 end

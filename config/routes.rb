@@ -21,7 +21,12 @@ Fuzion::Application.routes.draw do
     root :to => "dashboard#index"
   end
 
-  resources :matches
+  resources :matches do
+    member do
+      get :set_participation
+      put :update_participation
+    end
+  end
 
   root :to => "home#index"
   # The priority is based upon order of creation:

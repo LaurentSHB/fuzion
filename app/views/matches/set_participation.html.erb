@@ -1,0 +1,7 @@
+<% content_for :current_page, :matches %>
+Participation pour le match <strong><%= @match.affiche %></strong> du <strong><%= I18n.l(@match.date, :format => :long) %></strong>
+<%= form_for @participation, :as => :participation, :url => update_participation_match_path(@match), :html => {:class => "ahaha", :method => :put} do |f|%>
+  <%= f.hidden_field :id %>
+  <%= f.select :presence, [["Ne sait pas", "N"], ["Présent", "P"], ["Absent", "A"]] %>
+  <%= f.submit "Valider" %>
+<% end %>

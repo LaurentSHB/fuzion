@@ -10,4 +10,15 @@ class Participation < ActiveRecord::Base
 
   scope :present, where("presence = 'P'")
   scope :absent, where("presence = 'A'")
+
+  def presence_unknown?
+    self.presence != 'P' && self.presence != 'A'
+  end
+
+  def present?
+    self.presence == 'P'
+  end
+  def absent?
+    self.presence == 'A'
+  end
 end
