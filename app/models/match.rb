@@ -68,4 +68,8 @@ class Match < ActiveRecord::Base
   def affiche
     "#{self.team_dom.name} - #{self.team_ext.name}"
   end
+
+  def affiche_with_score
+    "#{self.team_dom.name} ( #{self.score_dom} - #{self.score_ext} ) #{self.team_ext.name}"
+  end
 end

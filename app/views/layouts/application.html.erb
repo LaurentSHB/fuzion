@@ -32,7 +32,7 @@
                 <% if current_user.is_admin_or_super_admin? %>
                   <%=  link_to  "Administration", admin_root_path   %> |
                 <% end %>
-                <%= link_to 'Se déconnecter', destroy_user_session_path %>
+                <%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %>
               </div>
             <% else %>
               <div class="login">Bienvenue <%= link_to('Identifiez vous', new_user_session_path)  %> </div>

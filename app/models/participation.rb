@@ -11,6 +11,9 @@ class Participation < ActiveRecord::Base
   scope :present, where("presence = 'P'")
   scope :absent, where("presence = 'A'")
 
+  scope :scorer, where("goals > 0").order("goals DESC")
+  scope :passer, where("passes > 0").order("passes DESC")
+  
   def presence_unknown?
     self.presence != 'P' && self.presence != 'A'
   end

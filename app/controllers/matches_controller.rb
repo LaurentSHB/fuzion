@@ -44,6 +44,12 @@ class MatchesController < ApplicationController
       @valid = false
     end
   end
+
+  def show
+    if !@match.ended? || !@match.fuzion_play?
+      redirect_to matches_path
+    end
+  end
   private
 
   def find_match

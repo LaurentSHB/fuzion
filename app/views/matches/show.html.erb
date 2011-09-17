@@ -1,0 +1,32 @@
+<% content_for :current_page, :matches %>
+<div><%= @match.affiche_with_score %></div>
+<div><%= I18n.l(@match.date, :format => :long) %></div>
+<div>Joueurs</div>
+<table>
+  <% @match.participations.convoqued.each do |part| %>
+    <tr>
+      <td style="width:150px"><%= part.user.full_name %></td>
+      <td style="width:50px"><%= part.notation %></td>
+    </tr>
+  <% end %>
+</table>
+<div>Buteurs</div>
+<table>
+<% @match.participations.scorer.each do |part| %>
+  <tr>
+      <td style="width:150px"><%= part.user.full_name %></td>
+      <td style="width:50px"><%= part.goals %></td>
+    </tr>
+<% end %>
+</table>
+<div>Passeurs</div>
+<table>
+<% @match.participations.passer.each do |part| %>
+  <tr>
+      <td style="width:150px"><%= part.user.full_name %></td>
+      <td style="width:50px"><%= part.passes %></td>
+    </tr>
+<% end %>
+</table>
+<div>Résumé</div>
+<%=raw @match.description %>
