@@ -61,6 +61,11 @@
               <%= unknown.full_name %><br />
             <% end %>
           </div>
+          <fieldset>
+            <legend>Liens mail</legend>
+            <p>Si vous êtes présent pour ce match, merci de cliquer ici :  <%= link_to "Présent", update_participation_from_mail_match_url(@match, :presence => "P") %></p>
+            <p>Si vous ne l'êtes pas, merci de cliquer ici :  <%= link_to "Absent", update_participation_from_mail_match_url(@match, :presence => "A") %></p>
+          </fieldset>
           <div class="required" style="clear: both">
             <label>&nbsp;</label>
             <%= link_to "Valider", "javascript:void(0)", :onclick => "$('#form_match').submit()", :class => "awesome green" %>&nbsp;

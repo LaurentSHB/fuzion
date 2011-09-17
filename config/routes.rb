@@ -25,6 +25,7 @@ Fuzion::Application.routes.draw do
     member do
       get :set_participation
       put :update_participation
+      get :update_participation_from_mail
     end
   end
 

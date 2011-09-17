@@ -1,0 +1,8 @@
+<% content_for :current_page, :matches %>
+<% if @valid %>
+  Votre disponibilité (<%= @participation.present? ? "Présent" : "Absent" %>) a bien été prise en compte pour le match
+<% else %>
+  Impossible de fixer votre disponibilité pour le match
+<% end %>
+  <br />
+  <strong><%= @match.affiche %></strong> du <strong><%= I18n.l(@match.date, :format => :long) %></strong>

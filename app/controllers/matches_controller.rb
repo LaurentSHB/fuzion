@@ -1,7 +1,7 @@
 #encoding: utf-8
 class MatchesController < ApplicationController
-  before_filter :authenticate_user!, :only => [:set_participation, :update_participation]
-  before_filter :find_match, :only => [:show, :set_participation, :update_participation]
+  before_filter :authenticate_user!, :only => [:set_participation, :update_participation, :update_participation_from_mail]
+  before_filter :find_match, :only => [:show, :set_participation, :update_participation, :update_participation_from_mail]
 
   def index
     @team = Team.find_by_is_fuzion true
@@ -28,6 +28,21 @@ class MatchesController < ApplicationController
       flash[:error] = "Impossible de mettre à jour votre disponibilité"
     end
     redirect_to matches_path
+  end
+
+  def update_participation_from_mail
+    if params[:presence] == "P" || params[:presence] == "A"
+      @participation = Participation.find_by_match_id_and_user_id(@match.id, current_user.id)
+      @participation = current_user.participations.new(:match_id => @match.id) if @participation.blank?
+      @participation.presence = params[:presence]
+      if @participation.save
+        @valid = true
+      else
+        @valid = false
+      end
+    else
+      @valid = false
+    end
   end
   private
 
