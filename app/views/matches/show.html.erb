@@ -1,6 +1,7 @@
 <% content_for :current_page, :matches %>
 <div><%= @match.affiche_with_score %></div>
 <div><%= I18n.l(@match.date, :format => :long) %></div>
+<div style="width:300px; float:left">
 <div>Joueurs</div>
 <table>
   <% @match.participations.convoqued.each do |part| %>
@@ -28,5 +29,14 @@
     </tr>
 <% end %>
 </table>
+</div>
+<div class="composition tac_<%= @match.composition.gsub("-", "") %>" >
+  <% 7.times do |idx| %>
+  <div class="position_joueur player_<%= idx %>">
+    <%= @match.send("player_#{idx}").full_name rescue "" %><br />
+    <%= "(#{@match.send("player_#{idx}_bis").full_name})" rescue "" %>
+  </div>
+  <% end %>
+</div>
 <div>Résumé</div>
 <%=raw @match.description %>
