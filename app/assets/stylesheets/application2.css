@@ -560,10 +560,7 @@ address{ font-size:14px;margin:0;padding:0;text-align:justify; font-style:normal
     margin-bottom:20px;
     vertical-align: top
 }
-.tac_231{
-    background-image: url(2-3-1.png);
-}
-.tac_231 .position_joueur{
+.position_joueur{
     position:absolute;
     width:100px;
     height:15px;
@@ -572,6 +569,10 @@ address{ font-size:14px;margin:0;padding:0;text-align:justify; font-style:normal
     text-align:center;
     font-weight:bold;
 }
+.tac_231{
+    background-image: url(2-3-1.png);
+}
+
 .tac_231 .position_joueur.player_1{
     margin-top:540px;
     margin-left:165px;
@@ -583,27 +584,70 @@ address{ font-size:14px;margin:0;padding:0;text-align:justify; font-style:normal
 	margin-left:162px;
 	line-height:15px;
 }
-.tac_231 .position_joueur.player_4{
-	margin-top:295px;
-	line-height:15px;
 
-}
 .tac_231 .position_joueur.player_6{
+    margin-top:295px;
+	line-height:15px;
 	margin-left:305px;
 }
 .tac_231 .position_joueur.player_4{
-	margin-left:165px;S
+    margin-top:295px;
+	line-height:15px;
+	margin-left:165px;
 }
 .tac_231 .position_joueur.player_5{
+    margin-top:295px;
+	line-height:15px;
 	margin-left:20px;
 }
-.position_joueur.DEF{
-	margin-top:454px;
-	line-height:15px;
-}
 .tac_231 .position_joueur.player_3{
+    margin-top:454px;
+	line-height:15px;
 	margin-left:225px;
 }
 .tac_231 .position_joueur.player_2{
+    margin-top:454px;
+	line-height:15px;
 	margin-left:105px;
+}
+.tac_321{
+    background-image: url(3-2-1.png);
+}
+
+.tac_321 .position_joueur.player_1{
+    margin-top:540px;
+    margin-left:165px;
+    line-height:15px;
+}
+
+.tac_321 .position_joueur.player_7{
+	margin-top:120px;
+	margin-left:162px;
+	line-height:15px;
+}
+
+.tac_321 .position_joueur.player_6{
+    margin-top:260px;
+	line-height:15px;
+	margin-left:232px;
+}
+.tac_321 .position_joueur.player_4{
+    margin-top:385px;
+	line-height:15px;
+	margin-left:270px;
+}
+.tac_321 .position_joueur.player_5{
+    margin-top:260px;
+	line-height:15px;
+	margin-left:100px;
+}
+.tac_321 .position_joueur.player_3{
+    margin-top:385px;
+	line-height:15px;
+	margin-left:50px;
+}
+.tac_321 .position_joueur.player_2{
+        margin-top:454px;
+	line-height:15px;
+	margin-left:165px;
 }
