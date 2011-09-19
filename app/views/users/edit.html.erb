@@ -1,0 +1,10 @@
+<% content_for :current_page, :users %>
+<div class="right_content">
+  <%= form_for(@user, :as => :user, :url => user_path(@user),
+    :html => {:multipart => true, :id => "form_user"}) do |f| %>
+    <%= render :partial => "users/user",
+      :locals => {:f => f, :button_name => "Enregistrer"} %>
+  <% end %>
+</div>
+
+

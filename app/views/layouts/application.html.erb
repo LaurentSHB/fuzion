@@ -28,7 +28,7 @@
             <% if user_signed_in? %>
               <div class="login">
                 Bienvenue <%= current_user.full_name %>  |
-  <%#=  link_to  "Mon Profil", private_profil_path   %> |
+  <%=  link_to  "Mon Profil", edit_user_path(current_user.id)   %> |
                 <% if current_user.is_admin_or_super_admin? %>
                   <%=  link_to  "Administration", admin_root_path   %> |
                 <% end %>
