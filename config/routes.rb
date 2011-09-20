@@ -26,6 +26,8 @@ Fuzion::Application.routes.draw do
       get :set_participation
       put :update_participation
       get :update_participation_from_mail
+      get :set_notation
+      put :update_notation
     end
   end
 

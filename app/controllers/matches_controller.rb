@@ -1,7 +1,7 @@
 #encoding: utf-8
 class MatchesController < ApplicationController
-  before_filter :authenticate_user!, :only => [:set_participation, :update_participation, :update_participation_from_mail]
-  before_filter :find_match, :only => [:show, :set_participation, :update_participation, :update_participation_from_mail]
+  before_filter :authenticate_user!, :only => [:set_participation, :update_participation, :update_participation_from_mail, :set_notation, :update_notation]
+  before_filter :find_match, :only => [:show, :set_participation, :update_participation, :update_participation_from_mail, :set_notation, :update_notation]
 
   def index
     @team = Team.find_by_is_fuzion true
@@ -49,6 +49,11 @@ class MatchesController < ApplicationController
     if !@match.ended? || !@match.fuzion_play?
       redirect_to matches_path
     end
+  end
+
+  def set_notation
+    @players = @match.participations.convoqued - [current_user]
+    raise @players.count.to_s
   end
   private
 

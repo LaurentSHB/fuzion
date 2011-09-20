@@ -67,6 +67,7 @@ fr:
       default: " %d %B %Y"
       long: "%d %B, %M %H"
       short: "%b %d"
+      
     prompts:
       day: Jour
       month: Mois
@@ -133,6 +134,7 @@ fr:
       mmyy: "%B %Y"
       ddmmyy: "%d %B %Y"
       dd-mm-yy: "%d-%m-%Y"
+      day_and_hour: "%A %d à %H:%M"
     am: "am"
     pm: "pm"
 
