@@ -1,0 +1,115 @@
+/* table */
+table { clear:both;border-collapse:collapse; border:0; margin:0; width:100%;-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px; border:1px solid #ddd; padding:5px; font-size:12px;margin:20px 0}
+table th{font-weight:normal; text-align:center; background-color:#666; font-size:10px; color:#fff}
+table th.title{background-color:#fff}
+table th a{ color:#666}
+table tr.dark{ background-color:#eee;}
+table tr{ border-bottom:1px solid #eee}
+table td{ padding:5px; font-size:0.9em; border-right:1px solid #eee; text-align:center}
+table tr#header th{ background-color:#EC4301; color:#fff; border-bottom:1px solid #900; font-size:0.8em}
+table tr.on{ background-color:#fff}
+table tr.on_darker{ background-color:#EEFDB3}
+table tr.off{ background-image:url(../images/bkgd_closed.gif); color:#999}
+table tr.off_darker{ background-image:url(../images/bkgd_closed_darker.gif); color:#999}
+table tr.off a{ color:#999}
+table tr.off_darker a{color:#000}
+table tr.title{ background-color:#eee; color:#333; font-weight:bold; padding:2px}
+table tr.title td{padding:2px}
+table tr.title.add{ background-color:#fff; color:#000000}
+table tr td.price{ white-space:nowrap; text-align:right; font-weight:bold; color:#333333}
+
+td.sold{color:red}
+td.free{color:#A2CF33}
+
+table tr.cost_gen{ text-align:right; white-space:nowrap }
+table tr.cost_gen td{ border-top:1px solid #eee; font-weight:bold; margin:20px 0 0 0; padding:5px; font-size:1.1em; color:#81AE6C}
+table tr.cost_gen td#total_value{ background-color:#81AE6C; color:#FFFFFF}
+
+table tr.cost_gen#total { text-align:right }
+table tr.cost_gen#total td{ border-top:1px solid #eee; font-weight:bold; margin:20px 0 0 0; padding:5px; font-size:1.4em; color:#81AE6C}
+table tr.cost_gen#total td#total_value{}
+
+.table_basket{ width:80%; margin:0 auto}
+.table_basket table tr td.cost { text-align:right; white-space:nowrap}
+.table_basket table tr td.name { text-align:left }
+
+/* liste product style */
+.table_box{ display:block; float:left; width:100%; clear:both;text-align:center;}
+.table_row{ display:block; float:left; width:100%; padding:5px 0 10px 0}
+.table_column{ display:block; float:left; width:33%;}
+.table_column_content{ display:block; width:100%; text-align:center;}
+
+
+
+.search_result{display:block;float:left; width:630px; float:left; border:inherit ;background:#666 url(../images/bloc_recherche3.gif) top no-repeat;margin-top:15px;} 
+.search_result table{ border-collapse:none; border-color:#666 ;width:98%; margin-left:1%; margin-top:15px;}
+.search_result td{border:1px solid #eee; font-size:0.8em; font-family:Arial;text-align:left;}
+.search_result td a{border:0px;}
+.search_result th{color:#fff; background-color:#666; text-align:center;}
+.search_result th a{ color:#fff;text-align:center;}
+.search_result a{font-size:0.9em; color:#333; font-weight:normal }
+.search_result td.name a{margin:0px; font-size:1.2em; font-weight:bold;} 
+.search_result td.name a:hover{text-decoration:underline} 
+
+
+/*bloc top login*/
+.zone_login{display:block; z-index:100; text-align:right; padding:0; float:right;  color:#333; font-size:0.9em; position:absolute;top:50px; right:10px;}
+.zone_login a{}
+.zone_login a:hover{ text-decoration:underline}
+.zone_login table{ float:right;margin:8px 0}
+.zone_login table tr{ border:0px}
+.zone_login table tr td{ white-space:nowrap; padding:0 10px; margin:0; font-size:1.2em; font-weight:bold;}
+.zone_login table tr td a{  font-weight:bold}
+.zone_login input{border:0; font-size:0.9em; width:120px;background-image:none; background-color:#FFFFFF;margin:2px 0; padding:2px}
+.zone_login input:hover{border:0; font-size:0.9em; width:120px; background-image:none; background-color:#FFFFFF;padding:2px }
+.zone_login input.btn{border:0px;  width:auto}
+.zone_login #contenu05{  background-color:#999; -moz-border-radius:8px 0px 8px 8px; color:#fff}
+.zone_login .login_content {
+background-position:left top;
+background-repeat:no-repeat;
+padding:5px 10px 5px 0;
+width:410px;
+float:left;}
+
+/*gen */
+
+.listed{ clear:both; width:100%; padding:0px; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:0px; background-color:#FFFFFF;}
+.listed table{ width:100%; margin-left:auto; margin-right:auto; color:#666; border-left:1px solid #eee; padding:0;z-index:12;}
+.listed table a{ text-decoration:none; color:#f90;}
+.listed table th{ background-color:#666666; font-weight:normal; font-size:11px; text-align:center; padding:5px; border-right:1px solid #999; border-bottom:1px solid #999; white-space:nowrap;}
+.listed table td{ padding:0 5px 0 5px; font-weight:normal; font-size:11px; border-right:1px solid #eee; border-bottom:1px solid #eee; margin:0; position:relative;}
+.listed table .line_dark { background-image:url(../images/deco/bkgd_light.gif); padding:0; margin:0}
+.listed table .line a{ padding:0; margin:0}
+.listed table .line_dark a{ padding:0; margin:0}
+.listed table .line_reply{ margin:30px; padding:50px}
+.listed table .avatar{  width:60px; height:60px;padding:0; margin:0; z-index:0;}
+.listed table .line_dark .avatar{ width:60px; height:60px; padding:0; margin:0}
+
+table.lots{ margin-top:10px}
+table.lots tr{ border-bottom:0px}
+table.lots th{ padding:8px 10px; text-align:left; background-color:#636363; color:#c2c2c2; border-right:1px solid #ccc}
+table.lots td{text-align:center; border:0px; border-left:0px solid #eee;padding:10px 4px;white-space:nowrap}
+table.lots td.programme{width:120px;}
+table.lots tr.dark{ background-color:#eaf6ff }
+table.lots tr.lots_title{ background-color:#e3e3e3; padding:2px 3px; font-size:12px}
+table.lots tr.lots_title td{color:#000; font-weight:normal;  border-right:1px solid #fff; padding:5px;  }
+table.lots td.price{font-weight:bold; color:#bf4049}
+table.lots a:hover{ text-decoration:none}
+table.lots td a{line-height:14px;}
+
+
+table.my_account th{ padding:2px 5px;}
+table.my_account tr{ border-left:1px solid #eee;border-right:1px solid #eee}
+table.my_account td a:hover{color:#bf4049}
+
+
+table.program_details{}
+table.program_details td{padding:2px 5px 2px 0px; }
+table.program_details td.prix{ font-size:1.1em; color:#333333; font-weight:bold; }
+table.program_details tr{border:none; width:100% }
+
+
+
+

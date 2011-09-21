@@ -52,7 +52,7 @@
   <body>
     <div id="container">
       <div class="customer_bar">
-        <div class="customer_logo"></div>
+        <div class="customer_logo">Parlez-moi d'Immo 2 - Administration</div>
 
       </div>
 
@@ -65,7 +65,9 @@
           <li><%= link_to 'Equipes',  admin_teams_path,:class => (yield :current_page) == 'teams' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
           <li><%= link_to 'Compétitions',  admin_competitions_path,:class => (yield :current_page) == 'competitions' ? 'current' : nil if can? :view_super_admin_side, nil %></li>
           <li><%= link_to 'Matchs',  admin_matches_path,:class => (yield :current_page) == 'matches' ? 'current' : nil if can? :view_admin_side, nil %></li>
-          <li><%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %></li>
+          
+          <li style="float:right"><%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %></li>
+          <li style="float:right"><%= link_to 'Revenir au site', root_path %></li>
           
         </ul>
         <ul style="float: right">

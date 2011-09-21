@@ -15,7 +15,7 @@
 
     <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : ""%>
     <br />
-<%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) %>
+<%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) if can?(:set_notation, @match)%>
   </div>
   <div>Buteurs</div>
   <table>

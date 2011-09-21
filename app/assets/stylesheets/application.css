@@ -4,5 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require application2
+ *= require application_form
+ *= require application_table2
  * require_tree .
 */
