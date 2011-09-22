@@ -6,10 +6,9 @@
 @import "application_block.css";
 @import "prettyPhoto.css";*/
 
-html, body {
-    font-family:"Arial";font-size:13px;margin:0;padding:0; }
-body {background-image:url(../images/footer.gif); background-repeat:repeat;  }
-html, body.empty {margin:0;padding:0; }
+html, body {font-family:"Arial";font-size:13px;margin:0;padding:0; background-color:#000}
+body {background-image:url(../images/footer.gif); background-repeat:repeat;font-family:"Arial";  }
+html, body.empty {margin:0;padding:0;font-family:"Arial";}
 
 h1, h2, h3, h4 {
     clear:both;
@@ -121,7 +120,12 @@ address{ font-size:14px;margin:0;padding:0;text-align:justify; font-style:normal
 .conteneur {margin:0 auto;padding:0;width:980px; }
 .conteneur_style {clear:both;display:block;float:left;margin:0;padding:0 ;width:980px;}
 .content_html {background-color:#CCCCCC;}
-.content {display:block;float:left;position:relative;width:960px; padding:10px 10px 10px 10px;background-color:#EAE9DE}
+.content {display:block;float:left;position:relative;width:960px; padding:10px 10px 10px 10px;background-color:#EAE9DE; -webkit-border-top-left-radius: 4px;
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-topright: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;}
 .contenu {display:block;float:left;width:635px; margin-right:15px }
 .contenu p a {font-weight:normal; text-decoration:underline; color:#666}
 .contenu p a:hover {font-weight:normal; text-decoration:underline}
@@ -176,15 +180,21 @@ address{ font-size:14px;margin:0;padding:0;text-align:justify; font-style:normal
 
 
 
-.header {display:block;float:left;height:70px;padding:0px ;position:relative;width:100%;}
+.header {display:block;float:left;height:132px;padding:0px ;position:relative;width:100%; background-image:url(header.png); background-position:top center; background-repeat:no-repeat}
 .header_content {background-repeat:no-repeat; clear:both;display:block;float:left; width:100%; height:80px; background-position:left; color: #FE9A2E}
 .header_content h1{font-size:3em;color:#FE9A2E; padding-top:20px ; clear:none; width:660px; text-align:left; font-weight: bold}
 .header_content a {display:block;height:110px;width:320px; float:left}
 
 
-.footer {clear:both;color:#777;display:block;float:left;padding:20px 0;width:100%;z-index:100;line-height:normal; background-color: #000; background-repeat:repeat-x; background-position:top;margin:0px;}
+.footer {clear:both;color:#777;display:block;float:left;padding:0;width:100%;z-index:100;line-height:normal;margin:0px;font-size:11px}
 .footer_style{ display:block;width:980px; margin:0 auto;}
-.footer_style strong, .footer_style p{color:#777;font-size:13px}
+.footer_style span{ display:block; float:left; width:98%; padding:1%; background-color:#333333; margin:0px;-webkit-border-bottom-right-radius: 4px;
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-bottomright: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;}
+.footer_style strong, .footer_style p{color:#777;font-size:11px}
 .footer a {color:#777;}
 .footer a:hover {color:#D31C4C;text-decoration:underline;}
 .footer h4 {color:#666;font-size:16px;text-shadow: 1px 1px #eee; width:auto; padding-right:10px; line-height:1em; vertical-align:bottom}

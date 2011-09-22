@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Carré Foch</title>
+    <title>Parlez Moi d'Immo 2</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <%= stylesheet_link_tag "application" %>
@@ -45,8 +45,8 @@
           <!-- nice menu -->
           <div class="navcontainer01">
             <ul>
-              <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => (yield :current_page) == 'home' ? 'first' : nil%></li>
-              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path, :class => (yield :current_page) == 'matches' ? 'first' : nil%></li>
+              <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => 'first' %></li>
+              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path, :class => (yield :current_page) == 'matches' ? '' : nil%></li>
               <li <%= "class='current'" if (yield :current_page) == "professional" %> ><%#= link_to 'Commerces et services',  professionals_path, :class => (yield :current_page) == 'professional' ? 'first' : nil%></li>
               <li <%= "class='current'" if (yield :current_page) == "advertisement" %> ><%#= link_to 'Les petites annonces',  advertisements_path, :class => (yield :current_page) == 'advertisement' ? 'first' : nil%></li>
               <li <%= "class='current'" if (yield :current_page) == "history" %> ><%#= link_to 'Historique',  "/historique.html", :class => (yield :current_page) == 'history' ? 'first' : nil%></li>
@@ -66,7 +66,7 @@
 
     <div class="footer">
       <div class="footer_style">
-        Site de la Fuzion
+        <span>Site de la Fuzion</span>
 
       </div>
     </div>
