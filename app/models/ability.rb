@@ -11,8 +11,12 @@ class Ability
     end
 
     can :set_notation, Match do |match|
+      if user.blank?
+        false
+      else
       p = user.participations.find_by_match_id(match.id)
-      !p.blank? && p.convocation && !p.notation_done
+      !p.blank? && p.convocation && !p.notation_done && match.notation_out_date > Time.now
+      end
     end
         
 #
