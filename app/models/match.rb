@@ -72,4 +72,9 @@ class Match < ActiveRecord::Base
   def affiche_with_score
     "#{self.team_dom.name} ( #{self.score_dom} - #{self.score_ext} ) #{self.team_ext.name}"
   end
+
+  def notation_out_date
+    Time.new(self.date.year, self.date.month, self.date.day + 2, 12 )
+
+  end
 end

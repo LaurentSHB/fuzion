@@ -6,17 +6,23 @@
   <table>
     <% @match.participations.convoqued.each do |part| %>
       <tr>
-        <td style="width:150px"><%= part.user.full_name %></td>
-        <td style="width:50px"><%= part.notation %></td>
+        <td style="width:200px"><%= part.user.firstname %></td>
+        <td style="width:100px"><%= @match.notation_out_date < Time.now ? part.notation : "" %></td>
       </tr>
     <% end %>
   </table>
+  <div>
+
+    <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : ""%>
+    <br />
+<%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) if can?(:set_notation, @match)%>
+  </div>
   <div>Buteurs</div>
   <table>
     <% @match.participations.scorer.each do |part| %>
       <tr>
-        <td style="width:150px"><%= part.user.full_name %></td>
-        <td style="width:50px">
+        <td style="width:200px"><%= part.user.firstname %></td>
+        <td style="width:100px">
           <% part.goals.times do  %>
             <%= image_tag("ballon.gif") %>
           <% end %></td>
@@ -27,8 +33,8 @@
   <table>
     <% @match.participations.passer.each do |part| %>
       <tr>
-        <td style="width:150px"><%= part.user.full_name %></td>
-        <td style="width:50px">
+        <td style="width:200px"><%= part.user.firstname %></td>
+        <td style="width:100px">
           <% part.passes.times do  %>
             <%= image_tag("passe.jpg") %>
           <% end %>
@@ -37,11 +43,11 @@
     <% end %>
   </table>
 </div>
-<div class="composition tac_<%= @match.composition.gsub("-", "") %>" >
+<div class="composition tac_<%= @match.composition.gsub("-", "") rescue "321"%>" >
   <% 8.times do |idx| %>
     <div class="position_joueur player_<%= idx %>">
-      <%= @match.send("player_#{idx}").full_name rescue "" %><br />
-      <%= "(#{@match.send("player_#{idx}_bis").full_name})" rescue "" %>
+      <%= @match.send("player_#{idx}").firstname rescue "" %><br />
+      <%= "(#{@match.send("player_#{idx}_bis").firstname})" rescue "" %>
     </div>
   <% end %>
 </div>

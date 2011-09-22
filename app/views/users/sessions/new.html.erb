@@ -1,0 +1,23 @@
+
+<h2>Connexion</h2>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<div class="required">
+<%= f.label :email, "E-mail" %>
+<%= f.text_field :email %>
+</div>
+<div class="required">
+<%= f.label :password, "Mot de passe" %>
+<%= f.password_field :password %>
+</div>
+<div class="required">
+<% if devise_mapping.rememberable? -%>
+<%= f.check_box :remember_me %>
+<%= f.label :remember_me, "Se souvenir de moi" %>
+<% end -%>
+</div>
+<div class="optional">
+<label>&nbsp;</label>
+<%= f.submit "Connexion" %>
+<% end %>
+</div>
+<%#= render :partial => "devise/shared/links" %>
