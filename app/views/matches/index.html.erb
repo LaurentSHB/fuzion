@@ -1,13 +1,32 @@
 <% content_for :current_page, :matches %>
-Calendrier
-<table>
+<h1>Calendrier de Parlez Moi d'Immo 2</h1>
+<table class="calendrier">
   <% @matches.each do |match| %>
-    <tr class="<%= match.competition.competition_type.downcase %>">
-      <td style="width:130px"><%= I18n.l(match.date, :format => :long) %></td>
-      <td style="width:200px"><%= match.team_dom.name %></td>
-      <td style="width:50px"><%= link_to "#{match.score_dom} - #{match.score_ext}", match_path(match) %></td>
-      <td style="width:200px"><%= match.team_ext.name %></td>
-      <td style="width:50px">
+    <tr class="<%= match.competition.competition_type.downcase %> <%= cycle("light", "shade") %>" >
+      <td class="type">
+        <% if match.competition.competition_type == "Championnat" %>
+          Championnat <%= match.day_number %><%= match.day_number == 1 ? "re" : "e" %> journée
+        <% else %>
+          <%= match.competition.competition_type %>
+        <% end %>
+      </td>
+      <td class="date"><%= I18n.l(match.date, :format => :long) %></td>
+      <td class="team_dom">
+        <% if match.team_dom.is_fuzion %>
+          <%= link_to match.team_dom.name, "#" %>
+        <% else %>
+          <%= match.team_dom.name %>
+        <% end %>
+      </td>
+      <td class="result <%= match.fuzion_result? %>" ><%= link_to "#{match.score_dom} - #{match.score_ext}", match_path(match) %></td>
+      <td class="team_ext">
+        <% if match.team_ext.is_fuzion %>
+          <%= link_to match.team_ext.name, "#" %>
+        <% else %>
+          <%= match.team_ext.name %>
+        <% end %>
+      </td>
+      <td class="participation">
         <% if match.fuzion_play? && !current_user.blank? %>
           <% if match.ended? %>
             <% if current_user.played?(match) %>
@@ -16,8 +35,8 @@ Calendrier
               <span class="red">Pas participé</span>
             <% end %>
           <% else %>
-            <% participation = current_user.participations.find_by_match_id(match.id) 
-              presence = participation.blank? || participation.presence_unknown? ? "Disponibilité?" : participation.present? ? "Présent" : "Absent"
+            <% participation = current_user.participations.find_by_match_id(match.id)
+            presence = participation.blank? || participation.presence_unknown? ? "Disponibilité?" : participation.present? ? "Présent" : "Absent"
           %>
             <%= link_to presence, set_participation_match_path(match) %>
           <% end %>

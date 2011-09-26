@@ -7,11 +7,31 @@ table th.title{background-color:#fff}
 table th a{ color:#666}
 table tr.dark{ background-color:#eee;}
 table tr{ }
-table td{ padding:5px; font-size:0.9em;}
+table td{ padding:5px; font-size:1em;}
 
 
 
+table.calendrier{
+    width:800px
+}
 
+table.calendrier .coupe.light td{background-color: #F8E0E0}
+table.calendrier .coupe.shade td{background-color: #F6D8CE}
+table.calendrier .championnat.light td{background-color: #F2F2F2}
+table.calendrier .championnat.shade td{background-color: #E8E8E8}
+table.calendrier .amical.light td{background-color: #E3F6CE}
+table.calendrier .amical.shade td{background-color: #D0F5A9}
 
-
-
+.calendrier td.type{width:150px}
+.calendrier td.date{width:170px}
+.calendrier td.team_dom{width:150px; text-align: right;}
+.calendrier td.team_dom a{font-weight: bold;}
+.calendrier td.result{width:50px; text-align: center; font-weight: bold; }
+.calendrier td.result a{color: #000000}
+.calendrier td.result.defaite a{color: red}
+.calendrier td.result.victoire a{color: green}
+.calendrier td.team_ext{width:150px;}
+.calendrier td.team_ext a{font-weight: bold;}
+.calendrier td.participation{width:70px; text-align: right;}
+.calendrier td.participation .green{color:green}
+.calendrier td.participation .red{color:red}

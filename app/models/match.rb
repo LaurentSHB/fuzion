@@ -75,6 +75,21 @@ class Match < ActiveRecord::Base
 
   def notation_out_date
     Time.new(self.date.year, self.date.month, self.date.day + 2, 12 )
+  end
 
+  def fuzion_result?
+    if fuzion_play?
+      if self.score_dom == self.score_ext
+        "nul"
+      else
+        if self.team_dom.is_fuzion && self.score_dom > self.score_ext || self.team_ext.is_fuzion && self.score_dom < self.score_ext
+          "victoire"
+        else
+          "defaite"
+        end
+      end
+    else
+      ""
+    end
   end
 end
