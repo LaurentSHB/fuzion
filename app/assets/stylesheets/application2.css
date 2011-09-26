@@ -661,3 +661,19 @@ border-bottom-left-radius: 4px;}
 	line-height:15px;
 	margin-left:165px;
 }
+
+.notation_players{
+    float:left
+}
+.notation_player_name{
+    width : 100px;
+    text-align:left
+}
+.notation_criteria{
+    margin-left: 100px;
+    float:left;
+    color: grey
+}
+.notation_criteria strong{
+    color: grey
+}

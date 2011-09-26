@@ -5,7 +5,7 @@ textarea:focus{background-color:#fff}
 select{ border:1px solid #ddd; float:left; font-size:1em}
 .toolbar form input{float:right; text-align:center}
 input:value{color:#FF0000}
-form div{padding:5px 0; display:block; float:left; clear:both; width:100%; text-align:right }
+form div{padding:2px 0; display:block; float:left; clear:both; width:100%; text-align:right }
 
 form div.required{text-align:left; clear:both; font-weight:bold ; padding:10px 0}
 form div.optional{text-align:left;clear:both; padding:10px 0}

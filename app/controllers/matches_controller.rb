@@ -52,8 +52,20 @@ class MatchesController < ApplicationController
   end
 
   def set_notation
-    @players = @match.participations.convoqued - [current_user]
-    raise @players.count.to_s
+    authorize! :set_notation,@match
+    @participations = @match.participations.convoqued.where('user_id != ?', current_user.id)
+  end
+
+  def update_notation
+    authorize! :set_notation,@match
+    params[:note].each do |note|
+      participation = Participation.find(note.first)
+      participation.set_notation(note.last)
+    end
+    user_part = Participation.find_by_match_id_and_user_id(@match.id, current_user.id)
+    user_part.update_attribute(:notation_done, true)
+    flash[:notice] = "Les notes ont été enregistrées avec succès"
+    redirect_to match_path @match
   end
   private
 

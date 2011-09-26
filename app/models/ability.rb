@@ -17,6 +17,7 @@ class Ability
       p = user.participations.find_by_match_id(match.id)
       !p.blank? && p.convocation && !p.notation_done && match.notation_out_date > Time.now
       end
+     
     end
         
 #

@@ -7,13 +7,13 @@
     <% @match.participations.convoqued.each do |part| %>
       <tr>
         <td style="width:200px"><%= part.user.firstname %></td>
-        <td style="width:100px"><%= @match.notation_out_date < Time.now ? part.notation : "" %></td>
+        <td style="width:100px"><%= @match.notation_out_date < Time.now && !part.notation.blank? ? part.notation.round(1) : "(pas de note)" %></td>
       </tr>
     <% end %>
   </table>
   <div>
 
-    <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : ""%>
+    <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : "" %>
     <br />
 <%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) if can?(:set_notation, @match)%>
   </div>

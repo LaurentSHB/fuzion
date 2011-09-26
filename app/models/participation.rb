@@ -21,7 +21,14 @@ class Participation < ActiveRecord::Base
   def present?
     self.presence == 'P'
   end
+
   def absent?
     self.presence == 'A'
+  end
+
+  def set_notation(note)
+    self.notation = (self.notation.to_f * self.nb_notation.to_i + note.to_f) / (self.nb_notation.to_i + 1)
+    self.nb_notation = self.nb_notation.to_i + 1
+    self.save
   end
 end

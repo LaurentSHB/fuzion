@@ -1,0 +1,25 @@
+<% content_for :current_page, :matches %>
+<div class="notation_players">
+  <%= form_tag update_notation_match_path(@match), :method => :put do %>
+    <% @participations.each do |participation|  %>
+      <div>
+        <span class="notation_player_name"><%= participation.user.firstname %></span>
+        <%= select_tag "note[#{participation.id}]", options_for_select(["",1,2,3,4,5,6,7,8,9,10])%>
+      </div>
+    <% end %>
+    <%= submit_tag "Valider"  %>
+  <% end %>
+</div>
+<div class="notation_criteria">
+  <strong>Critère de notation</strong><br />
+  10 : Match parfait<br />
+  9 : Match exceptionnel<br />
+  8 : Très bon match<br />
+  7 : Bon match<br />
+  6 : Match satisfaisant<br />
+  5 : Match moyen<br />
+  4 : Match insuffisant<br />
+  3 : Mauvais match<br />
+  2 : Très mauvais match<br />
+  1 : Match exécrable<br />
+</div>
