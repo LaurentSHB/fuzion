@@ -1,55 +1,70 @@
 <% content_for :current_page, :matches %>
-<div><%= @match.affiche_with_score %></div>
-<div><%= I18n.l(@match.date, :format => :long) %></div>
-<div style="width:300px; float:left">
-  <div>Joueurs</div>
-  <table>
-    <% @match.participations.convoqued.each do |part| %>
-      <tr>
-        <td style="width:200px"><%= part.user.firstname %></td>
-        <td style="width:100px"><%= @match.notation_out_date < Time.now && !part.notation.blank? ? part.notation.round(1) : "(pas de note)" %></td>
-      </tr>
-    <% end %>
+<div class="detail_match">
+  <div class="date"><%= I18n.l(@match.date, :format => :long) %>&nbsp;&nbsp;&nbsp; Lieu : <%= @match.city %></div>
+  <table class="affiche">
+    <tr>
+      <td class="dom"><%= @match.team_dom.name %></td>
+      <td class="sep">-</td>
+      <td class="ext"><%= @match.team_ext.name %></td>
+    </tr>
+    <tr>
+      <td class="dom"><%= @match.score_dom %></td>
+      <td class="sep">-</td>
+      <td class="ext"><%= @match.score_ext %></td>
+    </tr>
   </table>
-  <div>
-
-    <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : "" %>
-    <br />
-<%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) if can?(:set_notation, @match)%>
-  </div>
-  <div>Buteurs</div>
-  <table>
-    <% @match.participations.scorer.each do |part| %>
-      <tr>
-        <td style="width:200px"><%= part.user.firstname %></td>
-        <td style="width:100px">
-          <% part.goals.times do  %>
-            <%= image_tag("ballon.gif") %>
-          <% end %></td>
-      </tr>
-    <% end %>
-  </table>
-  <div>Passeurs</div>
-  <table>
-    <% @match.participations.passer.each do |part| %>
-      <tr>
-        <td style="width:200px"><%= part.user.firstname %></td>
-        <td style="width:100px">
-          <% part.passes.times do  %>
-            <%= image_tag("passe.jpg") %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
-<div class="composition tac_<%= @match.composition.gsub("-", "") rescue "321"%>" >
-  <% 8.times do |idx| %>
-    <div class="position_joueur player_<%= idx %>">
-      <%= @match.send("player_#{idx}").firstname rescue "" %><br />
-      <%= "(#{@match.send("player_#{idx}_bis").firstname})" rescue "" %>
+  <div style="width:300px; float:left">
+    <div class="separator">Joueurs</div>
+    <table>
+      <% @match.participations.convoqued.each do |part| %>
+        <tr>
+          <td class="name"><%= part.user.firstname %></td>
+          <td class="value"><%= @match.notation_out_date < Time.now && !part.notation.blank? ? part.notation.round(1) : "(pas de note)" %></td>
+        </tr>
+      <% end %>
+    </table>
+    <div class="set_notation">
+      <div>
+        <%= @match.notation_out_date > Time.now ? "Les notes seront affichées #{I18n.l(@match.notation_out_date, :format => :day_and_hour)}" : "" %>
+      </div>
+      <div>
+        <%= link_to "Notez vos coéquipiés",set_notation_match_path(@match) if can?(:set_notation, @match)%>
+      </div>
     </div>
-  <% end %>
+    <div class="separator">Buteurs</div>
+    <table>
+      <% @match.participations.scorer.each do |part| %>
+        <tr>
+          <td class="name"><%= part.user.firstname %></td>
+          <td class="value">
+            <% part.goals.times do  %>
+              <%= image_tag("ballon.png", :width=>"12px") %>
+            <% end %></td>
+        </tr>
+      <% end %>
+    </table>
+    <div class="separator">Passeurs</div>
+    <table>
+      <% @match.participations.passer.each do |part| %>
+        <tr>
+          <td class="name"><%= part.user.firstname %></td>
+          <td class="value">
+            <% part.passes.times do  %>
+              <%= image_tag("passe.png") %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="composition tac_<%= @match.composition.gsub("-", "") rescue "321"%>" >
+    <% 8.times do |idx| %>
+      <div class="position_joueur player_<%= idx %>">
+        <%= @match.send("player_#{idx}").firstname rescue "" %><br />
+        <%= "(#{@match.send("player_#{idx}_bis").firstname})" rescue "" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="separator">Résumé</div>
+  <div><%=raw @match.description %></div>
 </div>
-<div>Résumé</div>
-<%=raw @match.description %>

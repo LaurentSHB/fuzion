@@ -7,7 +7,7 @@
         <%= select_tag "note[#{participation.id}]", options_for_select(["",1,2,3,4,5,6,7,8,9,10])%>
       </div>
     <% end %>
-    <%= submit_tag "Valider"  %>
+    <%= submit_tag "Valider", :confirm => "Êtes-vous sûr des notes que vous attribuez?\nUne fois validées vous ne pourrez plus les modifier"  %>
   <% end %>
 </div>
 <div class="notation_criteria">

@@ -43,6 +43,8 @@ class Match < ActiveRecord::Base
 
   before_validation :add_minute_and_hour_to_date
 
+  before_save :set_city
+
   accepts_nested_attributes_for :participations
 
   scope :filter_by_team, lambda{ |team_id|
@@ -55,6 +57,10 @@ class Match < ActiveRecord::Base
     self.date += self.minute_for_date.to_i.minutes if !self.minute_for_date.blank?
     
     self.date += self.hour_for_date.to_i.hours if !self.hour_for_date.blank?
+  end
+
+  def set_city
+    self.city = self.team_dom.city
   end
 
   def fuzion_play?
