@@ -1,0 +1,24 @@
+<% content_for :current_page, :teams %>
+<h1>Classement Championnat - Excellence B</h1>
+<table class="classement">
+  <tr>
+    <th class="position">Clt</th>
+    <th class="equipe">Equipe</th>
+    <th class="number">J</th>
+    <th class="number">G</th>
+    <th class="number">N</th>
+    <th class="number">P</th>
+    <th class="number">Bp</th>
+    <th class="number">Bc</th>
+    <th class="number">Diff.</th>
+    <th class="number">Pts</th>
+  </tr>
+<% @teams.each_with_index do |team, idx| %>
+  <% team_stats = team.get_stats(@competition) %>
+  <tr>
+    <td class="position"><%= idx + 1 %></td>
+    <td class="equipe"><%= team.name %></td>
+
+  </tr>
+<% end %>
+  </table>

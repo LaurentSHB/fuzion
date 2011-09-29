@@ -50,6 +50,8 @@ class Match < ActiveRecord::Base
   scope :filter_by_team, lambda{ |team_id|
     where("team_dom_id = ? OR team_ext_id = ?", team_id, team_id).order("date ASC")
   }
+
+  scope :ended, where("score_dom IS NOT NULL AND score_ext IS NOT NULL")
   #A modifier en cas d'édition
   def add_minute_and_hour_to_date
     self.date = Date.today if self.date.blank?

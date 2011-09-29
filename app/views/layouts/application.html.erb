@@ -46,12 +46,9 @@
           <div class="navcontainer01">
             <ul>
               <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => 'first' %></li>
-              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path, :class => (yield :current_page) == 'matches' ? '' : nil%></li>
-              <li <%= "class='current'" if (yield :current_page) == "professional" %> ><%#= link_to 'Commerces et services',  professionals_path, :class => (yield :current_page) == 'professional' ? 'first' : nil%></li>
-              <li <%= "class='current'" if (yield :current_page) == "advertisement" %> ><%#= link_to 'Les petites annonces',  advertisements_path, :class => (yield :current_page) == 'advertisement' ? 'first' : nil%></li>
-              <li <%= "class='current'" if (yield :current_page) == "history" %> ><%#= link_to 'Historique',  "/historique.html", :class => (yield :current_page) == 'history' ? 'first' : nil%></li>
-              <li <%= "class='current'" if (yield :current_page) == "contact" %>><%#= link_to 'Contact',  new_contact_path, :class => ((yield :current_page) == 'contact' ? 'first contact_menu' : "contact_menu") %></li>
-            </ul>
+              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path %></li>
+              <li <%= "class='current'" if (yield :current_page) == "teams" %> ><%= link_to 'Classement',  teams_path %></li>
+                         </ul>
           </div>
 
 

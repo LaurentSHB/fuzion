@@ -31,6 +31,8 @@ Fuzion::Application.routes.draw do
     end
   end
 
+  resources :classement, :as => :teams, :controller => :teams
+
   resources :users 
 
   root :to => "home#index"
