@@ -18,7 +18,14 @@
   <tr>
     <td class="position"><%= idx + 1 %></td>
     <td class="equipe"><%= team.name %></td>
-
+    <td class="number"><%= team_stats[:days] %></td>
+    <td class="number"><%= team_stats[:victoires] %></td>
+    <td class="number"><%= team_stats[:nuls] %></td>
+    <td class="number"><%= team_stats[:defaite] %></td>
+    <td class="number"><%= team_stats[:goals_in] %></td>
+    <td class="number"><%= team_stats[:goals_out] %></td>
+    <td class="number"><%= team_stats[:goals_in] - team_stats[:goals_out] %></td>
+    <td class="number"><%= team_stats[:points] %></td>
   </tr>
 <% end %>
   </table>

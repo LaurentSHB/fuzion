@@ -87,17 +87,21 @@ class Match < ActiveRecord::Base
 
   def fuzion_result?
     if fuzion_play?
-      if self.score_dom == self.score_ext
-        "nul"
-      else
-        if self.team_dom.is_fuzion && self.score_dom > self.score_ext || self.team_ext.is_fuzion && self.score_dom < self.score_ext
+      result(self.team_dom.is_fuzion ? self.team_dom : self.team_ext)
+    else
+      ""
+    end
+  end
+
+  def result(team)
+    if self.score_dom == self.score_ext
+      "nul"
+    else
+        if self.team_dom_id == team.id && self.score_dom > self.score_ext || self.team_ext_id == team.id && self.score_dom < self.score_ext
           "victoire"
         else
           "defaite"
         end
       end
-    else
-      ""
-    end
   end
 end
