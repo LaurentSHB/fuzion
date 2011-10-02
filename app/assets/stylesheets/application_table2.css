@@ -35,3 +35,13 @@ table.calendrier .amical.shade td{background-color: #D0F5A9}
 .calendrier td.participation{width:70px; text-align: right;}
 .calendrier td.participation .green{color:green}
 .calendrier td.participation .red{color:red}
+
+table.classement{width:700px}
+table.classement th {font-size: 1em; background-color: #222; color:#F5730A; padding: 4px 0}
+table.classement .light td{background-color: #F2F2F2}
+table.classement .shade td{background-color: #E8E8E8}
+
+table.classement .position{text-align:left; width: 20px}
+table.classement .equipe{text-align:left; width: 100px}
+table.classement .number{text-align:center; width:30px}
+table.classement .points{text-align:right; padding-right:10px; width: 15px; font-weight: bold}

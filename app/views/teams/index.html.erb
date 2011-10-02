@@ -11,13 +11,13 @@
     <th class="number">Bp</th>
     <th class="number">Bc</th>
     <th class="number">Diff.</th>
-    <th class="number">Pts</th>
+    <th class="points">Pts</th>
   </tr>
 <% @teams.each_with_index do |team, idx| %>
-  <% team_stats = team.get_stats(@competition) %>
-  <tr>
+  <% team_stats = team[:stats] %>
+  <tr class="<%= cycle("light", "shade") %>">
     <td class="position"><%= idx + 1 %></td>
-    <td class="equipe"><%= team.name %></td>
+    <td class="equipe"><%= raw  team.is_fuzion ? "<strong>#{link_to(team.name, "#")}</strong>" : team.name %></td>
     <td class="number"><%= team_stats[:days] %></td>
     <td class="number"><%= team_stats[:victoires] %></td>
     <td class="number"><%= team_stats[:nuls] %></td>
@@ -25,7 +25,7 @@
     <td class="number"><%= team_stats[:goals_in] %></td>
     <td class="number"><%= team_stats[:goals_out] %></td>
     <td class="number"><%= team_stats[:goals_in] - team_stats[:goals_out] %></td>
-    <td class="number"><%= team_stats[:points] %></td>
+    <td class="points"><%= team_stats[:points] %></td>
   </tr>
 <% end %>
   </table>

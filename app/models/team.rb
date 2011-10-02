@@ -24,6 +24,9 @@ class Team < ActiveRecord::Base
       if match.team_dom_id == self.id
         hash[:goals_in] += match.score_dom
         hash[:goals_out] += match.score_ext
+      else
+        hash[:goals_in] += match.score_ext
+        hash[:goals_out] += match.score_dom
       end
      
         hash[:points] += points  if !(match.withdrawal && result == "defaite")
