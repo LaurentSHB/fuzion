@@ -1,7 +1,7 @@
 <% content_for :current_page, :users %>
 <h1>Les joueurs de Parlez-Moi d'Immo 2</h1>
 <table class="joueurs">
-  <tr>
+  <tr class="first">
     <th class="numero">Num</th>
     <th class="joueur">Joueur</th>
     <th class="poste">Poste</th>
@@ -10,19 +10,19 @@
     <th class="competition" colspan="3">Amical</th>
     <th class="competition" colspan="3">Total</th>
   </tr>
-  <tr>
+  <tr class="second">
     <th>&nbsp</th>
     <th>&nbsp</th>
     <th>&nbsp</th>
     <% 4.times do %>
-      <th class="stat">J.</th>
+      <th class="stat left">J.</th>
       <th class="stat">B.</th>
       <th class="stat">P.</th>
     <% end %>
   </tr>
   <% @users.each do |user| %>
     <% stats = user.stats(@competitions) %>
-    <tr>
+    <tr class="<%= cycle("light", "shade") %>">
       <td class="numero"><%= user.number %></td>
       <td class="joueur"><%= user.firstname %></td>
       <td class="poste"><%= user.poste %></td>
@@ -30,10 +30,14 @@
       <% [:championnat, :coupe, :amical, :total].each do |comp| %>
         <% s = stats[:"#{comp}"]
             s = {} if s.blank?%>
-        <td class="stat"><%= s[:days].to_i%></td>
+        <td class="stat left"><%= s[:days].to_i%></td>
         <td class="stat"><%= s[:goals].to_i%></td>
         <td class="stat"><%= s[:passes].to_i%></td>
       <% end %>
     </tr>
   <% end %>
+
 </table>
+<%= form_tag users_path, :id => "add_amical_form", :method => :get do %>
+Ajouter les matchs amicaux <%= check_box_tag "add_amical", "1", params[:add_amical] == "1", :onclick => "$('#add_amical_form').submit()" %>
+<% end %>

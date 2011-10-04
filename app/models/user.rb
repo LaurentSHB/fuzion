@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def stats(competitions)
     hash={}
     competitions.each do |competition|
-      stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0}
+      stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0, :in_total => competition[:in_total]}
       competition.matches.each do |match|
         part = self.participations.find_by_match_id_and_convocation(match.id, true)
         
@@ -57,11 +57,13 @@ class User < ActiveRecord::Base
     stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0}
     hash.each do |h|
       s = h.last
-      stats[:days] += s[:days]
-      stats[:goals] += s[:goals]
-      stats[:passes] += s[:passes]
-      stats[:notation] = (stats[:notation] * stats[:nb_notation] + s[:notation]) / (stats[:nb_notation] + 1) if s[:notation].to_f > 0
-      stats[:nb_notation] += 1 if s[:notation].to_f > 0
+      if s[:in_total]
+        stats[:days] += s[:days]
+        stats[:goals] += s[:goals]
+        stats[:passes] += s[:passes]
+        stats[:notation] = (stats[:notation] * stats[:nb_notation] + s[:notation]) / (stats[:nb_notation] + 1) if s[:notation].to_f > 0
+        stats[:nb_notation] += 1 if s[:notation].to_f > 0
+      end
     end
     hash[:total] = stats
     hash

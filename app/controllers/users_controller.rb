@@ -26,9 +26,14 @@ class UsersController < ApplicationController
   def index
     @users = User.activated.order("number ASC")
     @competitions = Competition.where("ended = ?", false)
-#    @competitions.each do |competition|
-#      competition.
-#    end
+    @competitions.each do |competition|
+      if competition.competition_type == "Amical" && params[:add_amical].blank?
+        competition[:in_total] = false
+      else
+        competition[:in_total] = true
+      end
+      
+    end
   end
   private
 
