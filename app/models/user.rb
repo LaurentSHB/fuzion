@@ -2,18 +2,18 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname,
-                  :firstname, :number, :poste, :phone, :role, :active
+    :firstname, :number, :poste, :phone, :role, :active
 
   POSTES = ["Gardien", "Defenseur", "Milieu", "Attaquant"]
 
   has_many :participations
   has_many :matches, :through => :participations
 
-  scope :actived, where(["active = ?", true])
+  scope :activated, where(["active = ?", true])
   def is_admin?
     self.role == "admin"
   end
@@ -33,5 +33,37 @@ class User < ActiveRecord::Base
   def played?(match)
     m = self.participations.find_by_match_id_and_convocation(match.id, true)
     !m.blank?
+  end
+
+  def stats(competitions)
+    hash={}
+    competitions.each do |competition|
+      stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0}
+      competition.matches.each do |match|
+        part = self.participations.find_by_match_id_and_convocation(match.id, true)
+        
+        if !part.blank?
+          
+          stats[:days] += 1
+          stats[:goals] += part.goals.to_i
+          stats[:passes] += part.passes.to_i
+          stats[:notation] = (stats[:notation] * stats[:nb_notation] + part.notation.to_f) / (stats[:nb_notation] + 1) if part.notation.to_f > 0
+          stats[:nb_notation] += 1 if part.notation.to_f > 0
+        end
+      end
+      hash[:"#{competition.competition_type.downcase}"] = stats
+    end
+    
+    stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0}
+    hash.each do |h|
+      s = h.last
+      stats[:days] += s[:days]
+      stats[:goals] += s[:goals]
+      stats[:passes] += s[:passes]
+      stats[:notation] = (stats[:notation] * stats[:nb_notation] + s[:notation]) / (stats[:nb_notation] + 1) if s[:notation].to_f > 0
+      stats[:nb_notation] += 1 if s[:notation].to_f > 0
+    end
+    hash[:total] = stats
+    hash
   end
 end

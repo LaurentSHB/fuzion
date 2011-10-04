@@ -72,10 +72,10 @@ class Admin::MatchesController < Admin::AreaController
   def scoresheet
     (9 - @match.players.count).times{ @match.participations.build }
     @match.participations.build
-    @users_for_select = [[""]] + (User.actived - @match.players).collect{|u| [u.full_name, u.id]}
+    @users_for_select = [[""]] + (User.activated - @match.players).collect{|u| [u.full_name, u.id]}
     @presents = @match.presents
     @absents = @match.absents
-    @presence_unknown = User.actived - @presents - @absents
+    @presence_unknown = User.activated - @presents - @absents
   end
 
 

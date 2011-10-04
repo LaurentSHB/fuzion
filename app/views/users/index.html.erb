@@ -1,0 +1,39 @@
+<% content_for :current_page, :users %>
+<h1>Les joueurs de Parlez-Moi d'Immo 2</h1>
+<table class="joueurs">
+  <tr>
+    <th class="numero">Num</th>
+    <th class="joueur">Joueur</th>
+    <th class="poste">Poste</th>
+    <th class="competition" colspan="3">Championnat</th>
+    <th class="competition" colspan="3">Coupe</th>
+    <th class="competition" colspan="3">Amical</th>
+    <th class="competition" colspan="3">Total</th>
+  </tr>
+  <tr>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
+    <% 4.times do %>
+      <th class="stat">J.</th>
+      <th class="stat">B.</th>
+      <th class="stat">P.</th>
+    <% end %>
+  </tr>
+  <% @users.each do |user| %>
+    <% stats = user.stats(@competitions) %>
+    <tr>
+      <td class="numero"><%= user.number %></td>
+      <td class="joueur"><%= user.firstname %></td>
+      <td class="poste"><%= user.poste %></td>
+
+      <% [:championnat, :coupe, :amical, :total].each do |comp| %>
+        <% s = stats[:"#{comp}"]
+            s = {} if s.blank?%>
+        <td class="stat"><%= s[:days].to_i%></td>
+        <td class="stat"><%= s[:goals].to_i%></td>
+        <td class="stat"><%= s[:passes].to_i%></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

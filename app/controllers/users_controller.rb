@@ -22,6 +22,14 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+  def index
+    @users = User.activated.order("number ASC")
+    @competitions = Competition.where("ended = ?", false)
+#    @competitions.each do |competition|
+#      competition.
+#    end
+  end
   private
 
   def find_user
