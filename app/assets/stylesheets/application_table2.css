@@ -38,8 +38,9 @@ table.calendrier .amical.shade td{background-color: #D0F5A9}
 
 table.classement{width:700px}
 table.classement th {font-size: 1em; background-color: #222; color:#F5730A; padding: 4px 0}
-table.classement .light td{background-color: #F2F2F2}
-table.classement .shade td{background-color: #E8E8E8}
+table.classement .light {background-color: #F2F2F2}
+table.classement .shade {background-color: #E8E8E8}
+table.classement tr:hover{background-color: #F5ECCE}
 
 table.classement .position{text-align:left; width: 20px}
 table.classement .equipe{text-align:left; width: 100px}

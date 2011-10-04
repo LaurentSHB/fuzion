@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :find_user
+  before_filter :authenticate_user!, :find_user, :only => [:update, :edit]
 
 
   def edit
