@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     hash={}
     competitions.each do |competition|
       stats = {:days => 0, :goals => 0, :passes => 0, :notation => 0, :nb_notation => 0, :in_total => competition[:in_total]}
-      competition.matches.each do |match|
+      competition.matches.ended.each do |match|
         part = self.participations.find_by_match_id_and_convocation(match.id, true)
         
         if !part.blank?
