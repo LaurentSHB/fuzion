@@ -14,7 +14,7 @@ class Admin::MatchesController < Admin::AreaController
       ary_for_request << params[:filter_by_team]
     end
 
-    selected_month_max = Time.new(@year, @month + 1 )
+    selected_month_max = Time.new(@month == 12 ? @year + 1 :@year,@month == 12 ? 1 : @month + 1 )
     selected_month_min = Time.new(@year, @month)
     request << "date >= ? AND date < ?"
     ary_for_request << selected_month_min
