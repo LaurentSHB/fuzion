@@ -62,7 +62,6 @@ h4 {
 
 strong {
     font-weight:bold;
-    color:#000
 }
 ul {
     clear:both
@@ -93,7 +92,7 @@ dd {
     float:left;
     text-align:left;
 }
-p { clear:both;font-size:12px;margin:0;padding:0; text-align:left; line-height:1.4em; color:#666; font-family:Arial}
+p { clear:both;margin:0;padding:0; text-align:left; line-height:1.4em; color:#666; font-family:Arial}
 hr {background-image:url(../images/border.png);background-position:top;background-repeat:repeat-x;clear:both;display:block;float:left;
     height:2px;width:100%;margin:0 0 10px 0; border:0px}
 small {
@@ -688,3 +687,5 @@ border-bottom-left-radius: 4px;}
 .detail_match .set_notation{margin: 10px 5px}
 .detail_match table .name{width:200px}
 .detail_match table .value{width:100px}
+.detail_match .resume{padding: 10px 0 0 5px; font-size:13px}
+.detail_match .resume p{color:#222; text-align: justify}

@@ -48,6 +48,7 @@
               <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => 'first' %></li>
               <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path %></li>
               <li <%= "class='current'" if (yield :current_page) == "teams" %> ><%= link_to 'Classement',  teams_path %></li>
+              <li <%= "class='current'" if (yield :current_page) == "users" %> ><%= link_to "L'équipe",  users_path %></li>
                          </ul>
           </div>
 
