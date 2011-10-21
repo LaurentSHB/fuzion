@@ -12,4 +12,8 @@ class TeamsController < ApplicationController
 
   end
 
+  def show
+    @team = Team.find params[:id]
+    @matches = Match.filter_by_team(@team.id)
+  end
 end

@@ -1,0 +1,31 @@
+<% content_for :current_page, :matches %>
+<h1>Calendrier de <%= @team.name %></h1>
+<table class="calendrier">
+  <% @matches.each do |match| %>
+    <tr class="<%= match.competition.competition_type.downcase %> <%= cycle("light", "shade") %>" >
+      <td class="type">
+        <% if match.competition.competition_type == "Championnat" %>
+          Championnat <%= match.day_number %><%= match.day_number == 1 ? "re" : "e" %> journée
+        <% else %>
+          <%= match.competition.competition_type %>
+        <% end %>
+      </td>
+      <td class="date"><%= I18n.l(match.date, :format => :long) %></td>
+      <td class="team_dom">
+        <% if match.team_dom.is_fuzion %>
+          <%= link_to match.team_dom.name, matches_path %>
+        <% else %>
+          <%= link_to match.team_dom.name, team_path(match.team_dom), :class => "other_team" %>
+        <% end %>
+      </td>
+      <td class="result <%= match.result(@team) %>" ><%= "#{match.score_dom} - #{match.score_ext}" %></td>
+      <td class="team_ext">
+        <% if match.team_ext.is_fuzion %>
+          <%= link_to match.team_ext.name, matches_path %>
+        <% else %>
+          <%= link_to match.team_ext.name, team_path(match.team_ext), :class => "other_team" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

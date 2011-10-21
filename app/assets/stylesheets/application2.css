@@ -81,6 +81,10 @@ a {
     color:#F5730A;
     text-decoration:none;
 }
+a.other_team {
+    color: #000;
+    font-weight: normal;
+}
 a:hover {
     color:#FE9A2E;
 }

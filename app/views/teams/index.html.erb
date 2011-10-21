@@ -17,7 +17,7 @@
   <% team_stats = team[:stats] %>
   <tr class="<%= cycle("light", "shade") %>">
     <td class="position"><%= idx + 1 %></td>
-    <td class="equipe"><%= raw  team.is_fuzion ? "<strong>#{link_to(team.name, "#")}</strong>" : team.name %></td>
+    <td class="equipe"><%= raw  team.is_fuzion ? "<strong>#{link_to(team.name, "#")}</strong>" : link_to(team.name, team_path(team), :class => "other_team") %></td>
     <td class="number"><%= team_stats[:days] %></td>
     <td class="number"><%= team_stats[:victoires] %></td>
     <td class="number"><%= team_stats[:nuls] %></td>

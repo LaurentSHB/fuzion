@@ -13,17 +13,17 @@
       <td class="date"><%= I18n.l(match.date, :format => :long) %></td>
       <td class="team_dom">
         <% if match.team_dom.is_fuzion %>
-          <%= link_to match.team_dom.name, "#" %>
+          <%= link_to match.team_dom.name, users_path %>
         <% else %>
-          <%= match.team_dom.name %>
+          <%= link_to match.team_dom.name, team_path(match.team_dom), :class => "other_team" %>
         <% end %>
       </td>
       <td class="result <%= match.fuzion_result? %>" ><%= link_to "#{match.score_dom} - #{match.score_ext}", match_path(match) %></td>
       <td class="team_ext">
         <% if match.team_ext.is_fuzion %>
-          <%= link_to match.team_ext.name, "#" %>
+          <%= link_to match.team_ext.name, users_path %>
         <% else %>
-          <%= match.team_ext.name %>
+          <%= link_to match.team_ext.name, team_path(match.team_ext), :class => "other_team" %>
         <% end %>
       </td>
       <td class="participation">
