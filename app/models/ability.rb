@@ -19,8 +19,18 @@ class Ability
       end
      
     end
-        
-#
+
+    can :add_comment do
+      !user.blank?
+    end
+
+    can :delete_comment, Comment do |comment|
+      (comment.user_id == user.id || user.is_super_admin? )rescue false
+    end
+
+    can :edit_comment, Comment do |comment|
+      (comment.user_id == user.id || user.is_super_admin? )rescue false
+    end
 #    can :view_details, Program do |program|
 #      !user.blank?
 #    end

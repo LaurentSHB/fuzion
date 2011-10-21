@@ -1,6 +1,15 @@
 <% content_for :current_page, :matches %>
 <div class="detail_match">
-  <div class="date"><%= I18n.l(@match.date, :format => :long) %>&nbsp;&nbsp;&nbsp; Lieu : <%= @match.city %></div>
+  <div class="separator">
+    <div class="date">
+      <%= I18n.l(@match.date, :format => :long) %> &nbsp;&nbsp;&nbsp; Lieu : <%= @match.city %>
+    </div>
+    <div class="nb_comments">
+      <a href="#comments">
+        <%= @comments.count %> commentaire<%= @comments.count > 1 ? "s" : "" %>
+      </a>
+    </div>
+  </div>
   <table class="affiche">
     <tr>
       <td class="dom"><%= @match.team_dom.name %></td>
@@ -67,4 +76,22 @@
   </div>
   <div class="separator">Résumé</div>
   <div class="resume"><%=raw @match.description %></div>
+  <div class="separator"><a name="comments">Commentaires</a></div>
+  <% @comments.each do |comment| %>
+    <div>
+      <%= comment.user.full_name %><br />
+      <%= I18n.l(comment.created_at, :format => :ddmmyy) %><br />
+      <%= raw comment.description %>
+      <% if can? :edit_comment, comment %>
+        <%= link_to "éditer", edit_comment_path(comment)  %>
+      <% end %>
+      <% if can? :delete_comment, comment %>
+        <%= link_to "supprimer", comment_path(comment), :method => :delete, :confirm => "Êtes-vous sûr de vouloir supprimer le commentaire"  %>
+      <% end %>
+    </div>
+
+  <% end %>
+  <% if can? :add_comment, nil %>
+    <%= render :partial => "comments/new", :locals => {:obj => @match} %>
+  <% end %>
 </div>

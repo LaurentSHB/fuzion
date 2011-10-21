@@ -49,6 +49,7 @@ class MatchesController < ApplicationController
     if !@match.ended? || !@match.fuzion_play?
       redirect_to matches_path
     end
+    @comments = @match.comments.order("created_at ASC")
   end
 
   def set_notation

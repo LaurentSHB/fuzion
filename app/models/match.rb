@@ -35,6 +35,8 @@ class Match < ActiveRecord::Base
   has_many :presents, :through => :participations, :source => :user, :conditions => ["presence = ?", "P"]
   has_many :absents, :through => :participations, :source => :user, :conditions => ["presence = ?", "A"]
 
+  has_many :comments, :as => :commentable
+  
   validates :competition_id, :presence => true
   validates :team_dom_id, :presence => true
   validates :team_ext_id, :presence => true
