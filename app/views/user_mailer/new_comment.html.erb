@@ -1,0 +1,8 @@
+<% link = @comment.commentable.is_a?(Match)? match_url(@comment.commentable.id) : root_url %>
+<p>Salut,</p>
+
+<p><%= @comment.user.firstname %> à laisser un commentaire sur le site</p>
+
+<p> <%= link_to "Clique ici", link %> pour voir ce commentaire et y répondre</p>
+
+<p>A+</p>
