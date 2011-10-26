@@ -64,3 +64,13 @@ Fuzion::Application.configure do
 end
 
 SYSTEM_MAILER = "Parlez Moi d'Immo 2 <no-reply@footfuzion.fr>"
+
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com'
+  }
+  ActionMailer::Base.delivery_method = :smtp
