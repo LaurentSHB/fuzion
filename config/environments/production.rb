@@ -62,3 +62,5 @@ Fuzion::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 end
+
+SYSTEM_MAILER = "Parlez Moi d'Immo 2 <no-reply@footfuzion.fr>"
