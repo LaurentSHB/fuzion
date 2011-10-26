@@ -683,7 +683,8 @@ text-align:center;
 }
 
 .detail_match{width: 760px}
-.detail_match .date{}
+.detail_match .date{float: left}
+.detail_match .nb_comments{float: right}
 .detail_match .affiche{color: #F5730A; font-size: 2em; font-weight: bold}
 .detail_match .affiche .dom{text-align:right}
 .detail_match .affiche .sep{text-align:center}
@@ -700,3 +701,12 @@ text-align:center;
 .home .defaite a{color: red; font-weight: bold}
 .home .nul a{color: #555; font-weight: bold}
 .home .victoire a{color: green; font-weight: bold}
+
+.clear{clear: both}
+
+.comment{border: 1px solid #999;margin:10px 0 0 10px; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+.comment .author{float: left;  padding: 5px; width: 121px; width: 20%}
+.comment .author .created_at{font-style: italic; font-size: 0.9em}
+.comment .description{float: left;line-height: 150%;  padding:5px 5px 25px 5px; width: 70%; border-left: 1px solid #ccc}
+.comment .action{float: right;  padding: 5px}
+.new_comment{margin: 10px 0 0 80px}

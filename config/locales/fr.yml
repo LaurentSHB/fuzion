@@ -131,6 +131,7 @@ fr:
       short: "%Y"
       #short: "%d %b"
       long: "%d %B %Y à %Hh%M"
+      comment: "%d %b. %Y à %H:%M"
       mmyy: "%B %Y"
       ddmmyy: "%d %B %Y"
       dd-mm-yy: "%d-%m-%Y"

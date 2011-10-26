@@ -1,6 +1,6 @@
 <%= form_for obj.comments.build, :url => comments_path do |f| %>
   <%= f.hidden_field :commentable_id %>
   <%= f.hidden_field :commentable_type %>
-  <%= f.text_area :description %>
+  <%= f.text_area :description, :cols => 50, :rows => 5 %>
   <%= f.submit "Commenter" %>
 <% end %>

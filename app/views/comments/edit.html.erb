@@ -1,4 +1,5 @@
+<h1>Editez votre commentaire</h1> 
 <%= form_for @comment, :url => comment_path(@comment) do |f| %>
-  <%= f.text_area :description %>
+  <%= f.text_area :description, :cols => 50, :rows => 5 %>
   <%= f.submit "Modifier" %>
 <% end %>

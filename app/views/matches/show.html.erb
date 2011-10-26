@@ -9,6 +9,7 @@
         <%= @comments.count %> commentaire<%= @comments.count > 1 ? "s" : "" %>
       </a>
     </div>
+    <div class="clear"></div>
   </div>
   <table class="affiche">
     <tr>
@@ -78,20 +79,30 @@
   <div class="resume"><%=raw @match.description %></div>
   <div class="separator"><a name="comments">Commentaires</a></div>
   <% @comments.each do |comment| %>
-    <div>
-      <%= comment.user.full_name %><br />
-      <%= I18n.l(comment.created_at, :format => :ddmmyy) %><br />
-      <%= raw comment.description %>
-      <% if can? :edit_comment, comment %>
-        <%= link_to "éditer", edit_comment_path(comment)  %>
-      <% end %>
-      <% if can? :delete_comment, comment %>
-        <%= link_to "supprimer", comment_path(comment), :method => :delete, :confirm => "Êtes-vous sûr de vouloir supprimer le commentaire"  %>
-      <% end %>
+    <div class="comment">
+      <div class="author">
+        <%= comment.user.firstname %><br />
+        <span class="created_at"><%= I18n.l(comment.created_at, :format => :comment) %></span>
+      </div>
+      <div class="description">
+        <%= raw comment.description %>
+      </div>
+      <div class="action">
+        <% if can? :edit_comment, comment %>
+          <%= link_to image_tag("edit.png"), edit_comment_path(comment)  %>
+          <br />
+        <% end %>
+        <% if can? :delete_comment, comment %>
+          <%= link_to image_tag("delete_rouge.png"), comment_path(comment), :method => :delete, :confirm => "Êtes-vous sûr de vouloir supprimer le commentaire"  %>
+        <% end %>
+      </div>
+      <div class="clear"></div>
     </div>
 
   <% end %>
   <% if can? :add_comment, nil %>
+  <div class="new_comment">
     <%= render :partial => "comments/new", :locals => {:obj => @match} %>
+    </div>
   <% end %>
 </div>
