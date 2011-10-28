@@ -64,9 +64,17 @@
             :html => {:multipart => true, :id => "form_match"}) do |f| %>
             <td style="width:150px"><%= f.select :competition_id, @competitions.collect{|c| [c.name, c.id]}, {},:onchange => "select_teams(this.value)" %></td>
             <td style="width:100px"><%= f.text_field :day_number, :size => 1 %></td>
-            <td style="width:150px" id="team_dom_block"><%= render :partial => "select_team", :locals => { :id_select => "team_dom_id"} %></td>
+            <td style="width:150px" id="team_dom_block">
+              <%= render :partial => "select_team", :locals => { :id_select => "team_dom"} %>
+              
+            </td>
+            <%= f.text_field :team_dom_id %>
             <td style="width:100px"></td>
-            <td style="width:150px" id="team_ext_block"><%= render :partial => "select_team", :locals => { :id_select => "team_ext_id"} %></td>
+            <td style="width:150px" id="team_ext_block">
+              <%= render :partial => "select_team", :locals => { :id_select => "team_ext"} %>
+             
+            </td>
+             <%= f.text_field :team_ext_id %>
             <td style="width:150px">
               <%= f.text_field :hour_for_date, :size => 1 %>:
               <%= f.text_field :minute_for_date, :size => 1 %>
@@ -78,7 +86,7 @@
                   $.ajax({
                     type: "GET",
                     url: "/admin/matches/select_teams.js",
-                    data: "competition_id="+competition_id+"&select_name='team_dom_id'",
+                    data: "competition_id="+competition_id+"&select_name=team_dom",
                     dataType: "html",
                     success: function(html){
                       $("#team_dom_block")[0].innerHTML = html
@@ -90,7 +98,7 @@
                   $.ajax({
                     type: "GET",
                     url: "/admin/matches/select_teams.js",
-                    data: "competition_id="+competition_id+"&select_name='team_dom_ext'",
+                    data: "competition_id="+competition_id+"&select_name=team_ext",
                     dataType: "html",
                     success: function(html){
                       $("#team_ext_block")[0].innerHTML = html

@@ -2,7 +2,7 @@
 class Admin::MatchesController < Admin::AreaController
   
   before_filter :find_match, :only => [ :edit, :update, :destroy, :scoresheet, :update_scoresheet ]
-
+  before_filter :get_competitions
   def index
     ary_for_request = [""]
     request = []
@@ -21,9 +21,10 @@ class Admin::MatchesController < Admin::AreaController
     ary_for_request << selected_month_max
     ary_for_request[0] = request.join(" AND ")
     @matches = Match.where(ary_for_request).all(:order => "date ASC")
-    @match = Match.new
-    @competitions = Competition.all
-    @teams_for_select = Competition.first.teams.collect{|t| [t.name, t.id]}
+    
+    
+    @teams_for_select = @competitions.first.teams.collect{|t| [t.name, t.id]}
+    @match = Match.new(:team_dom_id => @teams_for_select.first.last, :team_ext_id => @teams_for_select.first.last)
   end
 
   def create
@@ -33,8 +34,9 @@ class Admin::MatchesController < Admin::AreaController
       flash[:notice] = "Le match a été ajouté avec succès!"
       redirect_to admin_matches_path
     else
-      flash[:error] = "Une erreur s'est produite lors de l'ajout du match."
+      flash[:error] = "Une erreur s'est produite lors de l'ajout du match. #{@match.errors.full_messages}"
       @matches = Match.all(:order => "date DESC")
+      @teams_for_select = @competitions.first.teams.collect{|t| [t.name, t.id]}
       render :index
     end
   end
@@ -129,6 +131,10 @@ class Admin::MatchesController < Admin::AreaController
     @match = Match.find params[:id]
   end
 
+  def get_competitions
+    @competitions = Competition.all
+  end
+  
   def authorized_for_super_admin
     authorize! :view_super_admin_side, nil
   end

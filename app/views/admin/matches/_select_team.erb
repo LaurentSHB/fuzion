@@ -1,1 +1,1 @@
-<%= select_tag "match[#{id_select}]", options_for_select(@teams_for_select) %>
+<%= select_tag "#{id_select}_select", options_for_select(@teams_for_select), :onchange => "$('#match_#{id_select}_id')[0].value = this.value" %>

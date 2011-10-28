@@ -1,5 +1,9 @@
 <% content_for :current_page, :matches %>
-<h1>Calendrier de Parlez Moi d'Immo 2</h1>
+<h1 style="width:80%">Calendrier de Parlez Moi d'Immo 2</h1>
+<form action="" method="get">
+  <%= select_tag "year", options_for_select(YEARS, params[:year].to_i), :onchange => "this.form.submit()", :style=>"float:right" %>
+</form>
+
 <table class="calendrier">
   <% @matches.each do |match| %>
     <tr class="<%= match.competition.competition_type.downcase %> <%= cycle("light", "shade") %>" >

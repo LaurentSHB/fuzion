@@ -24,8 +24,10 @@ class UsersController < ApplicationController
   end
 
   def index
+    params[:year] ||= CURRENT_YEAR
     @users = User.activated.order("number ASC")
-    @competitions = Competition.where("ended = ?", false)
+    @competitions = Competition.find_all_by_year(params[:year])
+    #@competitions = Competition.where("ended = ?", false)
     @competitions.each do |competition|
       if competition.competition_type == "Amical" && params[:add_amical].blank?
         competition[:in_total] = false
