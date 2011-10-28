@@ -11,6 +11,9 @@ Fuzion::Application.routes.draw do
         get :scoresheet
         put :update_scoresheet
       end
+      collection do
+        get :select_teams
+      end
     end
     resources :posts do
       member do

@@ -22,7 +22,8 @@ class Admin::MatchesController < Admin::AreaController
     ary_for_request[0] = request.join(" AND ")
     @matches = Match.where(ary_for_request).all(:order => "date ASC")
     @match = Match.new
-    @teams_for_select = Team.all.collect{|t| [t.name, t.id]}
+    @competitions = Competition.all
+    @teams_for_select = Competition.first.teams.collect{|t| [t.name, t.id]}
   end
 
   def create
@@ -118,6 +119,11 @@ class Admin::MatchesController < Admin::AreaController
 
   end
 
+  def select_teams
+    competition = Competition.find params[:competition_id]
+    @teams_for_select = competition.teams.all.collect{|t| [t.name, t.id]}
+    render :partial => "select_team", :locals => {:id_select => params[:select_name]}
+  end
   private
   def find_match
     @match = Match.find params[:id]
