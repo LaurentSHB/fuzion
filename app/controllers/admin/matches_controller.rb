@@ -22,7 +22,7 @@ class Admin::MatchesController < Admin::AreaController
     ary_for_request[0] = request.join(" AND ")
     @matches = Match.where(ary_for_request).all(:order => "date ASC")
     
-    
+    @all_teams_for_select = Teams.all.collect{|t| [t.name, t.id]}
     @teams_for_select = @competitions.first.teams.collect{|t| [t.name, t.id]}
     @match = Match.new(:team_dom_id => @teams_for_select.first.last, :team_ext_id => @teams_for_select.first.last)
   end
