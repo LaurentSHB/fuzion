@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
   validates :commentable_type, :presence => true
   validates :user_id, :presence => true
 
-  after_create :notify_to_team
+  #after_create :notify_to_team
 
   private
 
