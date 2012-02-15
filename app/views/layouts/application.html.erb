@@ -25,18 +25,9 @@
         <div class="conteneur_style">
 
           <div class="header">
-            <% if user_signed_in? %>
-              <div class="login">
-                Bienvenue <%= current_user.full_name %>  |
-  <%=  link_to  "Mon Profil", edit_user_path(current_user.id)   %> |
-                <% if current_user.is_admin_or_super_admin? %>
-                  <%=  link_to  "Administration", admin_root_path   %> |
-                <% end %>
-                <%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete %>
-              </div>
-            <% else %>
-              <div class="login">Bienvenue <%= link_to('Identifiez vous', new_user_session_path)  %> </div>
-            <% end %>
+            <div class="login" id="login_content">
+
+            </div>
             <div class="header_content">
               <h1>Parlez Moi d'Immo 2</h1>
             </div>
@@ -49,7 +40,7 @@
               <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path %></li>
               <li <%= "class='current'" if (yield :current_page) == "teams" %> ><%= link_to 'Classement',  teams_path %></li>
               <li <%= "class='current'" if (yield :current_page) == "users" %> ><%= link_to "L'équipe",  users_path %></li>
-                         </ul>
+            </ul>
           </div>
 
 
@@ -67,8 +58,8 @@
         <span>
           Nous vous conseillons d'utiliser un vrai navigateur pour consulter ce site 
           ( <%= link_to "Chrome", "http://www.google.com/chrome?hl=fr" %>, 
-            <%= link_to "Firefox", "http://www.mozilla-europe.org/fr/" %> ou encore
-            <%= link_to "Safari", "http://www.apple.com/fr/safari/" %>)
+          <%= link_to "Firefox", "http://www.mozilla-europe.org/fr/" %> ou encore
+          <%= link_to "Safari", "http://www.apple.com/fr/safari/" %>)
           <br />
           Site développé en <%= link_to "Ruby on Rails", "http://rubyonrails.org/", :target => "_blank" %>
           par <%= link_to "Laurent B", "https://twitter.com/CupraR_on_rails", :target => "_blank" %>
@@ -76,8 +67,22 @@
 
       </div>
     </div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        $.ajax({
+          url: "<%= login_content_path %>",
+          dataType: "html",
+          success: function(html){
+            $("#login_content")[0].innerHTML =html
+          }
+        });
+      });
+
+    </script>
   </body>
 </html>
+
 
 
 

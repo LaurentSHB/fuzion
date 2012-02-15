@@ -40,6 +40,7 @@ Fuzion::Application.routes.draw do
   
   resources :users 
 
+  match "login_content", :to => "home#login_content"
   root :to => "home#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
