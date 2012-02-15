@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    response.headers['Cache-Control'] = 'public, max-age=300'
     params[:year] ||= CURRENT_YEAR
     @users = User.activated.order("number ASC")
     @competitions = Competition.find_all_by_year(params[:year])

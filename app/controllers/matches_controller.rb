@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
   before_filter :find_match, :only => [:show, :set_participation, :update_participation, :update_participation_from_mail, :set_notation, :update_notation]
 
   def index
+    response.headers['Cache-Control'] = 'public, max-age=300'
     params[:year] ||= CURRENT_YEAR
     @team = Team.find_by_is_fuzion true
     @matches = Match.filter_by_team(@team.id).filter_by_year(params[:year])

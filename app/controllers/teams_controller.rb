@@ -1,6 +1,7 @@
 #encoding: utf-8
 class TeamsController < ApplicationController
   def index
+    response.headers['Cache-Control'] = 'public, max-age=300'
     params[:year] ||= CURRENT_YEAR
     @competition = Competition.find_by_competition_type_and_year("Championnat", params[:year])
     @teams = @competition.teams rescue []
