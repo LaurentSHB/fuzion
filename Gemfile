@@ -22,7 +22,7 @@ gem "paperclip"
 
 gem "will_paginate"
 
-gem 'devise'
+gem 'devise', "1.5.3"
 gem 'acts_as_list'
 
 gem 'cancan'
