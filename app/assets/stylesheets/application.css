@@ -6,5 +6,6 @@
  *= require application2
  *= require application_form
  *= require application_table2
+ *= require application_menu
  * require_tree .
 */
