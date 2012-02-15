@@ -1,0 +1,68 @@
+/* table */
+
+table { clear:both;border-collapse:collapse; border:0; margin:0; width:100%;-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;  padding:5px; margin:10px 0}
+table th{font-weight:normal; text-align:center; background-color:#666; font-size:10px; color:#fff}
+table th.title{background-color:#fff}
+table th a{ color:#666}
+table tr.dark{ background-color:#eee;}
+table tr{ }
+table td{ padding:5px; font-size:1em;}
+
+
+
+table.calendrier{
+    width:800px
+}
+
+table.calendrier .coupe.light td{background-color: #F8E0E0}
+table.calendrier .coupe.shade td{background-color: #F6D8CE}
+table.calendrier .championnat.light td{background-color: #F2F2F2}
+table.calendrier .championnat.shade td{background-color: #E8E8E8}
+table.calendrier .amical.light td{background-color: #E3F6CE}
+table.calendrier .amical.shade td{background-color: #D0F5A9}
+
+.calendrier td.type{width:150px}
+.calendrier td.date{width:170px}
+.calendrier td.team_dom{width:150px; text-align: right;}
+.calendrier td.result{width:50px; text-align: center; font-weight: bold; }
+.calendrier td.result a{color: #000000}
+.calendrier td.result.defaite a{color: red}
+.calendrier td.result.victoire a{color: green}
+.calendrier td.result{color: #000000}
+.calendrier td.result.defaite{color: red}
+.calendrier td.result.victoire{color: green}
+.calendrier td.team_ext{width:150px;}
+.calendrier td a{font-weight: bold;}
+.calendrier td a.other_team{font-weight: normal;}
+
+.calendrier td.participation{width:70px; text-align: right;}
+.calendrier td.participation .green{color:green}
+.calendrier td.participation .red{color:red}
+
+table.classement{width:700px}
+table.classement th {font-size: 1em; background-color: #222; color:#F5730A; padding: 4px 0}
+table.classement .light {background-color: #F2F2F2}
+table.classement .shade {background-color: #E8E8E8}
+table.classement tr:hover{background-color: #F5ECCE}
+
+table.classement .position{text-align:left; width: 20px}
+table.classement .equipe{text-align:left; width: 100px}
+table.classement .number{text-align:center; width:30px}
+table.classement .points{text-align:right; padding-right:10px; width: 15px; font-weight: bold}
+
+table.joueurs {}
+table.joueurs th {font-weight:bold;font-size: 1em; background-color: #222; color:#F5730A; padding: 0 0}
+table.joueurs tr.first th{padding-top:4px}
+table.joueurs tr.second th{padding-bottom: 4px}
+table.joueurs .numero{text-align:left; width: 30px}
+table.joueurs .joueur{text-align:left; width: 120px}
+table.joueurs .poste{text-align:left; width: 100px}
+table.joueurs .competition{text-align:center; border-left:1px solid #F5730A}
+table.joueurs .stat{text-align:center; width: 25px}
+table.joueurs th.left{border-left:1px solid #F5730A}
+table.joueurs td.left{border-left:1px solid #F5730A}
+table.joueurs .light {background-color: #F2F2F2}
+table.joueurs .shade {background-color: #E8E8E8}
+table.joueurs tr:hover{background-color: #F5ECCE}

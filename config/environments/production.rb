@@ -22,6 +22,7 @@ Fuzion::Application.configure do
 
   config.assets.debug = true
 
+  config.assets.precompile += %w( *.css *.js)
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
