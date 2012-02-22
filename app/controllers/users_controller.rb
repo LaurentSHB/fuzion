@@ -2,7 +2,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :find_user, :only => [:update, :edit]
 
-
+  #Le cache est renouvellé une fois par jour hormis si un résultat est modifié
+  caches_action :index, :expires_in => 1.day
+  
   def edit
 
   end
@@ -24,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    response.headers['Cache-Control'] = 'public, max-age=300'
     params[:year] ||= CURRENT_YEAR
     @users = User.activated.order("number ASC")
     @competitions = Competition.find_all_by_year(params[:year])

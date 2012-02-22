@@ -3,6 +3,10 @@ class Admin::MatchesController < Admin::AreaController
   
   before_filter :find_match, :only => [ :edit, :update, :destroy, :scoresheet, :update_scoresheet ]
   before_filter :get_competitions
+  
+  #A chaque modif on refresh le cache des pages publiques
+  after_filter :refresh_public_cache, :only => [:create, :update, :update_scoresheet, :destroy]
+  
   def index
     ary_for_request = [""]
     request = []
@@ -47,7 +51,7 @@ class Admin::MatchesController < Admin::AreaController
     @match.minute_for_date = @match.date.min
   end
   
-  def update
+  def update  
     @match.attributes = params[:match]
 
     saved = @match.save
@@ -127,6 +131,14 @@ class Admin::MatchesController < Admin::AreaController
     render :partial => "select_team", :locals => {:id_select => params[:select_name]}
   end
   private
+  
+  #Expiration du cache des pages publiques
+  def refresh_public_cache
+    expire_action(:controller => '/home', :action => 'index')
+    expire_action(:controller => '/users', :action => 'index')
+    expire_action(:controller => '/matches', :action => 'index')
+  end
+  
   def find_match
     @match = Match.find params[:id]
   end

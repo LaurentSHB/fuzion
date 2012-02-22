@@ -1,7 +1,9 @@
 #encoding: utf-8
 class TeamsController < ApplicationController
+  
+  #Le cache est renouvellé une fois par jour hormis si un résultat est modifié
+  caches_action :index, :expires_in => 1.day
   def index
-    response.headers['Cache-Control'] = 'public, max-age=300'
     params[:year] ||= CURRENT_YEAR
     @competition = Competition.find_by_competition_type_and_year("Championnat", params[:year])
     @teams = @competition.teams rescue []
