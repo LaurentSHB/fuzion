@@ -137,6 +137,7 @@ class Admin::MatchesController < Admin::AreaController
     expire_action(:controller => '/home', :action => 'index')
     expire_action(:controller => '/users', :action => 'index')
     expire_action(:controller => '/matches', :action => 'index')
+    expire_action(:controller => '/teams', :action => 'index')
   end
   
   def find_match
