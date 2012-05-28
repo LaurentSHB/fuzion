@@ -2,7 +2,7 @@
 class TeamsController < ApplicationController
   
   #Le cache est renouvellé une fois par jour hormis si un résultat est modifié
-  caches_action :index, :expires_in => 1.day
+  caches_action :index, :expires_in => 1.second
   def index
     params[:year] ||= CURRENT_YEAR
     @competition = Competition.find_by_competition_type_and_year("Championnat", params[:year])

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :find_user, :only => [:update, :edit]
 
   #Le cache est renouvellé une fois par jour hormis si un résultat est modifié
-  caches_action :index, :expires_in => 1.day
+  caches_action :index, :expires_in => 1.second
   
   def edit
 
