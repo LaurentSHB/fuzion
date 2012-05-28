@@ -1,6 +1,6 @@
 <% content_for :current_page, :teams %>
 <h1 style="width:80%">Classement Championnat - Excellence B</h1>
-<form action="" method="get">
+<form action="<%= get_another_year_teams_path %>" method="get">
   <%= select_tag "year", options_for_select(YEARS, params[:year].to_i), :onchange => "this.form.submit()", :style=>"float:right" %>
 </form>
 <table class="classement">

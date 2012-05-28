@@ -1,6 +1,6 @@
 <% content_for :current_page, :users %>
 <h1 style="width:80%">Les joueurs de Parlez-Moi d'Immo 2</h1>
-<form action="" method="get">
+<form action="<%= get_another_year_users_path %>" method="get">
   <%= select_tag "year", options_for_select(YEARS, params[:year].to_i), :onchange => "this.form.submit()", :style=>"float:right" %>
 </form>
 <table class="joueurs">

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :find_user, :only => [:update, :edit]
 
   #Le cache est renouvellé une fois par jour hormis si un résultat est modifié
-  caches_action :index, :expires_in => 1.second
+  caches_action :index, :expires_in => 1.week
   
   def edit
 
@@ -26,6 +26,29 @@ class UsersController < ApplicationController
   end
 
   def index
+      get_users_data
+  end
+
+  def get_another_year
+    if params[:year].blank? || params[:year].to_i == CURRENT_YEAR
+      redirect_to users_path, :status => 301
+    else
+      redirect_to show_past_year_users_path(params[:year]), :status => 301
+    end
+  end
+  def show_past_year
+    if !params[:year].blank? && params[:year].to_i >= 2011
+      get_users_data
+    end
+    render :index
+  end
+  private
+
+  def find_user
+    @user = current_user
+  end
+
+  def get_users_data
     params[:year] ||= CURRENT_YEAR
     @users = User.activated.order("number ASC")
     @competitions = Competition.find_all_by_year(params[:year])
@@ -38,11 +61,5 @@ class UsersController < ApplicationController
       end
       
     end
-    
-  end
-  private
-
-  def find_user
-    @user = current_user
   end
 end
