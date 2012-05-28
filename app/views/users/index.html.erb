@@ -43,7 +43,7 @@
     <% end %>
   </table>
   <%= form_tag users_path, :id => "add_amical_form", :method => :get do %>
-    Ajouter les matchs amicaux au total <%=x check_box_tag "add_amical", "1", params[:add_amical] == "1", :onclick => "$('#add_amical_form').submit()" %>
+    Ajouter les matchs amicaux au total <%= check_box_tag "add_amical", "1", params[:add_amical] == "1", :onclick => "$('#add_amical_form').submit()" %>
   <% end %>
 <% else %>
   <%= render :partial => "season_#{params[:year]}" %>

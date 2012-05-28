@@ -39,7 +39,7 @@ Fuzion::Application.routes.draw do
   resources :comments
   
   resources :users 
-
+  match "palmares", :to => "statics#palmares"
   match "login_content", :to => "home#login_content"
   root :to => "home#index"
   # The priority is based upon order of creation:

@@ -710,3 +710,5 @@ text-align:center;
 .comment .description{float: left;line-height: 150%;  padding:5px 5px 25px 5px; width: 70%; border-left: 1px solid #ccc}
 .comment .action{float: right;  padding: 5px}
 .new_comment{margin: 10px 0 0 80px}
+
+.palmares_content{clear:both; margin:0 0 10px 20px}
