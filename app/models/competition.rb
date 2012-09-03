@@ -8,4 +8,6 @@ class Competition < ActiveRecord::Base
   has_many :matches
 
   attr_accessor :in_total
+
+  scope :not_ended, where(ended: false)
 end

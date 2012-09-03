@@ -145,7 +145,7 @@ class Admin::MatchesController < Admin::AreaController
   end
 
   def get_competitions
-    @competitions = Competition.all
+    @competitions = Competition.not_ended
   end
   
   def authorized_for_super_admin
