@@ -18,10 +18,9 @@ Fuzion::Application.configure do
   config.assets.compile = false
 
   # Generate digests for assets URLs
-  config.assets.digest = false
+  config.assets.digest = true
 
-  config.assets.debug = true
-
+  #config.assets.precompile += %w( back_office.css )
   config.assets.precompile += %w( *.css *.js)
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

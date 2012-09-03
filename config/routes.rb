@@ -34,12 +34,22 @@ Fuzion::Application.routes.draw do
     end
   end
 
-  resources :classement, :as => :teams, :controller => :teams
-
+  resources :classement, :as => :teams, :controller => :teams do
+    collection do
+      match "annee/:year", :to => "teams#show_past_year", :as => :show_past_year
+      get :get_another_year
+    end
+  end
   resources :comments
   
-  resources :users 
+  resources :users do
+    collection do
+      match "annee/:year", :to => "users#show_past_year", :as => :show_past_year
+      get :get_another_year
+    end
+  end
 
+  match "palmares", :to => "statics#palmares"
   match "login_content", :to => "home#login_content"
   root :to => "home#index"
   # The priority is based upon order of creation:

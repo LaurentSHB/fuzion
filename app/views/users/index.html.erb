@@ -1,6 +1,6 @@
 <% content_for :current_page, :users %>
 <h1 style="width:80%">Les joueurs de Parlez-Moi d'Immo 2</h1>
-<form action="" method="get">
+<form action="<%= get_another_year_users_path %>" method="get">
   <%= select_tag "year", options_for_select(YEARS, params[:year].to_i), :onchange => "this.form.submit()", :style=>"float:right" %>
 </form>
 <table class="joueurs">
@@ -23,24 +23,31 @@
       <th class="stat">P.</th>
     <% end %>
   </tr>
-  <% @users.each do |user| %>
-    <% stats = user.stats(@competitions) %>
-    <tr class="<%= cycle("light", "shade") %>">
-      <td class="numero"><%= user.number %></td>
-      <td class="joueur"><%= user.firstname %></td>
-      <td class="poste"><%= user.poste %></td>
+  <% if params[:year].to_i >= 2011 %>
+    <% @users.each do |user| %>
+      <% stats = user.stats(@competitions) %>
+      <tr class="<%= cycle("light", "shade") %>">
+        <td class="numero"><%= user.number %></td>
+        <td class="joueur"><%= user.firstname %></td>
+        <td class="poste"><%= user.poste %></td>
 
-      <% [:championnat, :coupe, :amical, :total].each do |comp| %>
-        <% s = stats[:"#{comp}"]
-            s = {} if s.blank?%>
-        <td class="stat left"><%= s[:days].to_i%></td>
-        <td class="stat"><%= s[:goals].to_i%></td>
-        <td class="stat"><%= s[:passes].to_i%></td>
-      <% end %>
-    </tr>
+        <% [:championnat, :coupe, :amical, :total].each do |comp| %>
+          <% s = stats[:"#{comp}"]
+          s = {} if s.blank?%>
+          <td class="stat left"><%= s[:days].to_i%></td>
+          <td class="stat"><%= s[:goals].to_i%></td>
+          <td class="stat"><%= s[:passes].to_i%></td>
+        <% end %>
+      </tr>
+
+    <% end %>
+  </table>
+  <%= form_tag users_path, :id => "add_amical_form", :method => :get do %>
+    Ajouter les matchs amicaux au total <%= check_box_tag "add_amical", "1", params[:add_amical] == "1", :onclick => "$('#add_amical_form').submit()" %>
   <% end %>
-
-</table>
-<%= form_tag users_path, :id => "add_amical_form", :method => :get do %>
-Ajouter les matchs amicaux au total <%= check_box_tag "add_amical", "1", params[:add_amical] == "1", :onclick => "$('#add_amical_form').submit()" %>
+<% else %>
+  <%= render :partial => "season_#{params[:year]}" %>
+  </table>
 <% end %>
+
+
