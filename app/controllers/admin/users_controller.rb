@@ -29,8 +29,8 @@ class Admin::UsersController < Admin::AreaController
     if params[:user][:password].blank?
       params[:user].delete(:password)
     end
-    @user.attributes = params[:user]
 
+    @user.attributes = params[:user]
 
     if @user.save
       flash[:notice] = "L'utilisateur a été mise à jour avec succès!"

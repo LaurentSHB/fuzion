@@ -6,14 +6,23 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname,
-    :firstname, :number, :poste, :phone, :role, :active
+    :firstname, :number, :poste, :phone, :role, :active, :user_qualifications_attributes
 
   POSTES = ["Gardien", "Defenseur", "Milieu", "Attaquant"]
 
   has_many :participations
+  has_many :user_qualifications, :order => "year"
   has_many :matches, :through => :participations
 
+  accepts_nested_attributes_for :user_qualifications
+
   scope :activated, where(["active = ?", true])
+  scope :qualified_for_year, lambda{|y|
+    joins(:user_qualifications).where("user_qualifications.year = ?", y).where("user_qualifications.qualified = ?", true)
+  }
+
+  after_create :create_user_participations
+
   def is_admin?
     self.role == "admin"
   end
@@ -67,5 +76,13 @@ class User < ActiveRecord::Base
     end
     hash[:total] = stats
     hash
+  end
+
+  private
+
+  def create_user_participations
+    [2011, 2012, 2013, 2014, 2015, 2016].each do |year|
+        self.user_qualifications.create(:year => year)
+      end
   end
 end

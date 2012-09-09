@@ -28,7 +28,7 @@ class Admin::MatchesController < Admin::AreaController
     
     @all_teams_for_select = Team.all.collect{|t| [t.name, t.id]}
     @teams_for_select = @competitions.first.teams.collect{|t| [t.name, t.id]}
-    @match = Match.new(:team_dom_id => @teams_for_select.first.last, :team_ext_id => @teams_for_select.first.last)
+    @match = Match.new#(:team_dom_id => @teams_for_select.first.last, :team_ext_id => @teams_for_select.first.last)
   end
 
   def create
@@ -41,6 +41,7 @@ class Admin::MatchesController < Admin::AreaController
       flash[:error] = "Une erreur s'est produite lors de l'ajout du match. #{@match.errors.full_messages}"
       @matches = Match.all(:order => "date DESC")
       @teams_for_select = @competitions.first.teams.collect{|t| [t.name, t.id]}
+      @all_teams_for_select = Team.all.collect{|t| [t.name, t.id]}
       render :index
     end
   end
@@ -79,7 +80,7 @@ class Admin::MatchesController < Admin::AreaController
   def scoresheet
     (9 - @match.players.count).times{ @match.participations.build }
     @match.participations.build
-    @users_for_select = [[""]] + (User.activated - @match.players).collect{|u| [u.full_name, u.id]}
+    @users_for_select = [[""]] + (User.activated.qualified_for_year(@match.competition.year) - @match.players).collect{|u| [u.full_name, u.id]}
     @presents = @match.presents
     @absents = @match.absents
     @presence_unknown = User.activated - @presents - @absents

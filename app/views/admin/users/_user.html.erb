@@ -36,6 +36,12 @@
       <span><%= f.radio_button :active, false %>Non</span>
     </div>
 
+    <%= f.fields_for(:user_qualifications) do |f_qualif| %>
+    <div class="required">
+      <label><%= f_qualif.object.year %> :</label>      
+      <%= f_qualif.check_box :qualified, {}, 1 %>
+    </div>
+    <% end %>
     <div class="required" style="clear: both">
       <label>&nbsp;</label>
       <%= link_to button_name, "javascript:void(0)", :onclick => "$('#form_user').submit()", :class => "awesome green" %>&nbsp;

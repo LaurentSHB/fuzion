@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     end
     @user.attributes = params[:user]
 
-
     if @user.save
       flash[:notice] = "L'utilisateur a été mise à jour avec succès!"
       redirect_to  edit_user_path(current_user)
@@ -50,7 +49,7 @@ class UsersController < ApplicationController
 
   def get_users_data
     params[:year] ||= CURRENT_YEAR
-    @users = User.activated.order("number ASC")
+    @users = User.qualified_for_year(params[:year]).order("number ASC")
     @competitions = Competition.find_all_by_year(params[:year])
     #@competitions = Competition.where("ended = ?", false)
     @competitions.each do |competition|
