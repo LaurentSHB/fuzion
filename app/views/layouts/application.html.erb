@@ -36,11 +36,11 @@
           <!-- nice menu -->
           <div class="navcontainer01">
             <ul>
-              <li <%= "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => 'first' %></li>
-              <li <%= "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path %></li>
-              <li <%= "class='current'" if (yield :current_page) == "teams" %> ><%= link_to 'Classement',  teams_path %></li>
-              <li <%= "class='current'" if (yield :current_page) == "users" %> ><%= link_to "L'équipe",  users_path %></li>
-              <li <%= "class='current'" if (yield :current_page) == "palmares" %> ><%= link_to "Palmarès",  palmares_path %></li>
+              <li <%= raw "class='current'" if (yield :current_page) == "home" %> ><%= link_to 'Accueil',  root_path, :class => 'first' %></li>
+              <li <%= raw "class='current'" if (yield :current_page) == "matches" %> ><%= link_to 'Calendrier',  matches_path %></li>
+              <li <%= raw "class='current'" if (yield :current_page) == "teams" %> ><%= link_to 'Classement',  teams_path %></li>
+              <li <%= raw "class='current'" if (yield :current_page) == "users" %> ><%= link_to "L'équipe",  users_path %></li>
+              <li <%= raw "class='current'" if (yield :current_page) == "palmares" %> ><%= link_to "Palmarès",  palmares_path %></li>
             </ul>
           </div>
 

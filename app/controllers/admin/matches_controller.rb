@@ -83,7 +83,7 @@ class Admin::MatchesController < Admin::AreaController
     @users_for_select = [[""]] + (User.activated.qualified_for_year(@match.competition.year) - @match.players).collect{|u| [u.full_name, u.id]}
     @presents = @match.presents
     @absents = @match.absents
-    @presence_unknown = User.activated - @presents - @absents
+    @presence_unknown = User.activated.qualified_for_year(@match.competition.year) - @presents - @absents
   end
 
 
