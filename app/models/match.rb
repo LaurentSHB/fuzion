@@ -89,7 +89,7 @@ class Match < ActiveRecord::Base
   def notation_out_date
     Time.new(self.date.year, self.date.month, self.date.day, 12 ) + 2.days
   end
-Matc
+
   def fuzion_result?
     if fuzion_play?
       result(self.team_dom.is_fuzion ? self.team_dom : self.team_ext)
