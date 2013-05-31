@@ -10,11 +10,13 @@ class MatchesController < ApplicationController
   end
 
   def set_participation
+    authorize! :play, @match
     @participation = Participation.find_by_user_id_and_match_id(current_user.id, @match.id)
     @participation = Participation.new if @participation.blank?
   end
 
   def update_participation
+    authorize! :play, @match
     if params[:participation][:id].blank?
       participation = current_user.participations.new
       participation.match_id = @match.id

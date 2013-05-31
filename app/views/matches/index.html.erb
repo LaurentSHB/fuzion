@@ -31,7 +31,7 @@
         <% end %>
       </td>
       <td class="participation">
-        <% if match.fuzion_play? && !current_user.blank? %>
+        <% if match.fuzion_play? && !current_user.blank? && can?(:play, match) %>
           <% if match.ended? %>
             <% if current_user.played?(match) %>
               <span class="green">A participé</span>

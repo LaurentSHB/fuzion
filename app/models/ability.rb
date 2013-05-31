@@ -31,6 +31,11 @@ class Ability
     can :edit_comment, Comment do |comment|
       (comment.user_id == user.id || user.is_super_admin? )rescue false
     end
+
+    can :play, Match do |match|
+      qualif = user.user_qualifications.find_by_year(match.competition.year)
+      !qualif.blank? && qualif.qualified?
+    end
 #    can :view_details, Program do |program|
 #      !user.blank?
 #    end
