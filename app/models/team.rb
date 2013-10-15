@@ -16,7 +16,7 @@ class Team < ActiveRecord::Base
         points = 2
       when "victoire"
         hash[:victoires] += 1
-        points = 3
+        points = competition.year >= 2013 ? 4 : 3
       when "defaite"
         hash[:defaite] += 1
         points = 1
